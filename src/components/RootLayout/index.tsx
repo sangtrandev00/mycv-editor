@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -6,6 +6,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
+
 import { Layout, Menu, Button, theme, Row, Col, Space, Divider } from 'antd';
 import SideBar from '../SideBar';
 import Awards from '../Awards';
@@ -14,14 +15,34 @@ import Contacts from '../Contacts';
 import TechSkills from '../TechSkills';
 import AddSkills from '../AddSkills';
 import SoftSkills from '../SoftSkills';
-
+import { IUser } from '../../types/user.type';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../store/store';
+import { getUser } from '../../store/user.slice';
 const { Header, Sider, Content } = Layout;
+
 
 const RootLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [userInfo, setUserInfo] = useState<IUser>();
+  const user = useSelector((state: RootState) => state.user.user);
+  const loading = useSelector((state: RootState) => state.user.loading);
+
+  const {id, jobTitle, info, additionSkills, softSkills, techSkills, projects, awards, education, careerObject, languages, links} = user;
+
+  console.log(user);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const promise =  dispatch(getUser());
+    return () => {
+     promise.abort();
+    }
+  }, [dispatch])
 
   return (
     <Layout className="">
@@ -55,18 +76,18 @@ const RootLayout: React.FC = () => {
                 <div className="cv-editor__my-info bg-primary w-full h-full text-white ">
                     <div className="my-info">
                         <div className="my-info__heading p-4 text-center">
-                            <h2 className="my-info__name text-3xl ">Tran Nhat Sang</h2>
-                            <h2 className="my-info__title mt-4 text-lg">Web developer</h2>
-                            <img src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="" className="mt-4 mx-auto my-info__img rounded-full w-32 h-32 object-cover" />
+                            <h2 className="my-info__name text-3xl ">{info.name}</h2>
+                            <h2 className="my-info__title mt-4 text-lg">{jobTitle}</h2>
+                            <img src={info.avatar} alt="" className="mt-4 mx-auto my-info__img rounded-full w-32 h-32 object-cover" />
                         </div>
                         <div className="my-info__contacts">
-                         <Contacts/>
+                         <Contacts info={info}/>
                         </div>
                         <div className="my-info__tech-skills">
                         <TechSkills/>
                         </div>
                         <div className="my-info__add-skills">
-                        <AddSkills/>
+                        <AddSkills addSkills={additionSkills}/>
                         </div>
                         <div className="my-info__soft-skills">
                         <SoftSkills/>
@@ -128,7 +149,7 @@ const RootLayout: React.FC = () => {
                                             <span>Level: </span> - Excellence
                                         </div>
                                         <div className="education__info-school-level">
-                                            <span>GPT: </span> - 9.5 (current)
+                                            <span>GPA: </span> - 9.5 (current)
                                         </div>
                                     </div>
                                 </div>

@@ -2,21 +2,38 @@
     "users": [
         {
             "id": "1",
+            "jobTitle": "Web Developer",
+            "links": {
+                "website": "https://trannhatsang.com",
+                "github": "https://github.com/sangtrandev00",
+                "linkedin": "https://linkedin.com/in/nhatsang00",
+                "facebook": "https://www.facebook.com/nhatsang00"
+            },
             "info": {
                 "name": "Tran Nhat Sang",
                 "dateOfBirth": "9/10/2022",
                 "phone": "0937988510",
                 "email": "nhatsang0101@gmail.com",
-                "address": "Di An, Binh Duong"
+                "address": "Di An, Binh Duong",
+                "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
             },
             "additionSkills": [
                 {
                     "id": "1",
-                    "name": "HTML"
+                    "name": "Git"
                 },
                 {
                     "id": "2",
-                    "name": "CSS"
+                    "name": "PHP"
+                },
+                {
+                    "id": "3",
+                    "name": "Wordpress"
+                }
+                ,
+                {
+                    "id": "4",
+                    "name": "Figma"
                 }
             ],
             "techSkills": [
@@ -35,7 +52,7 @@
                 "vietnamese",
                 "english"
             ],
-            "cerifications": [
+            "certifications": [
                 "TOEIC",
                 "IELTS"
             ],

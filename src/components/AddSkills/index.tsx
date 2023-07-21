@@ -1,6 +1,16 @@
 import React from 'react'
 
-const AddSkills = () => {
+type AddSkillsProps = {
+  addSkills: {
+    id: string;
+    name: string;
+  }[]
+}
+
+const AddSkills = (props: AddSkillsProps) => {
+
+  const {addSkills} = props
+
   return (
     <div className="add-skills">
         <h3 className="add-skills__title font-bold text-xl bg-dark-primary px-4 py-2" >Technical Skills</h3>
