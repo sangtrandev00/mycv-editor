@@ -4,8 +4,6 @@ import { Radio, Timeline } from 'antd';
 
 const Awards: React.FC = () => {
 
-
-
   return (
     <Timeline
     items={[

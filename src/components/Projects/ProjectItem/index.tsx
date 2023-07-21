@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProjectItem = () => {
   return (
-    <div className="projects__item">
+    <div className="projects__item mt-4">
     <h3 className="projects__item-title font-bold text-xl">MyCV.vn </h3>
     <p className="projects__item-time-line mt-2">(06/2018 - Present)</p>
     <div className="project-item__table">

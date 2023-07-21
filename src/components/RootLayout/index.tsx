@@ -10,6 +10,10 @@ import { Layout, Menu, Button, theme, Row, Col, Space, Divider } from 'antd';
 import SideBar from '../SideBar';
 import Awards from '../Awards';
 import Projects from '../Projects';
+import Contacts from '../Contacts';
+import TechSkills from '../TechSkills';
+import AddSkills from '../AddSkills';
+import SoftSkills from '../SoftSkills';
 
 const { Header, Sider, Content } = Layout;
 
@@ -50,12 +54,41 @@ const RootLayout: React.FC = () => {
             <Col md={8} className="cv-editor__col cv-editor__col--left">
                 <div className="cv-editor__my-info bg-primary w-full h-full text-white ">
                     <div className="my-info">
-                        <div className="my-info__heading p-4">
+                        <div className="my-info__heading p-4 text-center">
                             <h2 className="my-info__name text-3xl ">Tran Nhat Sang</h2>
                             <h2 className="my-info__title mt-4 text-lg">Web developer</h2>
+                            <img src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="" className="mt-4 mx-auto my-info__img rounded-full w-32 h-32 object-cover" />
                         </div>
                         <div className="my-info__contacts">
-                            <h3 className="my-info__contacts-title font-bold text-xl bg-dark-primary px-4 py-2">Contact information</h3>
+                         <Contacts/>
+                        </div>
+                        <div className="my-info__tech-skills">
+                        <TechSkills/>
+                        </div>
+                        <div className="my-info__add-skills">
+                        <AddSkills/>
+                        </div>
+                        <div className="my-info__soft-skills">
+                        <SoftSkills/>
+                        </div>
+                        <div className="my-info__languages">
+                          <div className="languages">
+                            <h3 className="languages__title font-bold p-4 text-xl bg-dark-primary">
+                            Languages
+                            </h3>
+                            <p className="languages__list p-4">English, Vietnamese</p>
+                          </div>
+                        </div>
+                        <div className="my-info__certifications">
+                          <div className="certifications">
+                            <h3 className="certifications__title font-bold p-4 text-xl bg-dark-primary">
+                            Certifications
+                            </h3>
+                            <ul className="certifications__list p-4">
+                              <li className="certifications__item mt-2">Toeic 660+</li>
+                              <li className="certifications__item mt-2">Certified Web Professional-Web Developer</li>
+                            </ul>
+                          </div>
                         </div>
                     </div>
                 </div>
