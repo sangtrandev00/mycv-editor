@@ -5,9 +5,10 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  EditOutlined
 } from '@ant-design/icons';
 
-import { Layout, Menu, Button, theme, Row, Col, Space, Divider } from 'antd';
+import { Layout, Menu, Button, theme, Row, Col, Space, Divider, Tooltip, Skeleton } from 'antd';
 import SideBar from '../SideBar';
 import Awards from '../Awards';
 import Projects from '../Projects';
@@ -19,18 +20,20 @@ import { IUser } from '../../types/user.type';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 import { getUser } from '../../store/user.slice';
-const { Header, Sider, Content } = Layout;
+import Education from '../Education';
+import MyLinks from '../MyLinks';
+import DrawerEntryData from '../SideBar/Drawer';
 
+const { Header, Sider, Content } = Layout;
 
 const RootLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [userInfo, setUserInfo] = useState<IUser>();
   const user = useSelector((state: RootState) => state.user.user);
-  const loading = useSelector((state: RootState) => state.user.loading);
+  const isLoading = useSelector((state: RootState) => state.user.loading);
 
-  const {id, jobTitle, info, additionSkills, softSkills, techSkills, projects, awards, education, careerObject, languages, links} = user;
+  const {id, jobTitle, info, additionSkills, softSkills, techSkills, projects, awards, education, careerObject, languages, links, certifications} = user;
 
-  console.log(user);
+  const languagesStr = languages.join(", ");
 
   const {
     token: { colorBgContainer },
@@ -39,6 +42,9 @@ const RootLayout: React.FC = () => {
 
   useEffect(() => {
     const promise =  dispatch(getUser());
+
+    console.log("init");
+
     return () => {
      promise.abort();
     }
@@ -62,7 +68,13 @@ const RootLayout: React.FC = () => {
               height: 64,
             }}
           />
+
+          <DrawerEntryData/>
         </Header>
+        <>
+        {isLoading && <Skeleton active={true}/>}
+        {!isLoading && 
+        (
         <Content className="cv-editor__content"
           style={{
             margin: '24px 16px',
@@ -79,35 +91,48 @@ const RootLayout: React.FC = () => {
                             <h2 className="my-info__name text-3xl ">{info.name}</h2>
                             <h2 className="my-info__title mt-4 text-lg">{jobTitle}</h2>
                             <img src={info.avatar} alt="" className="mt-4 mx-auto my-info__img rounded-full w-32 h-32 object-cover" />
+                            <MyLinks links={links}/>
+
                         </div>
                         <div className="my-info__contacts">
                          <Contacts info={info}/>
                         </div>
                         <div className="my-info__tech-skills">
-                        <TechSkills/>
+                        <TechSkills techSkills={techSkills}/>
                         </div>
                         <div className="my-info__add-skills">
                         <AddSkills addSkills={additionSkills}/>
                         </div>
                         <div className="my-info__soft-skills">
-                        <SoftSkills/>
+                        <SoftSkills softSkills={softSkills}/>
                         </div>
                         <div className="my-info__languages">
                           <div className="languages">
                             <h3 className="languages__title font-bold p-4 text-xl bg-dark-primary">
-                            Languages
+                            <Space>
+                                Languages
+                                <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                            </Space>
                             </h3>
-                            <p className="languages__list p-4">English, Vietnamese</p>
+                            <p className="languages__list p-4">{languagesStr}</p>
                           </div>
                         </div>
                         <div className="my-info__certifications">
                           <div className="certifications">
                             <h3 className="certifications__title font-bold p-4 text-xl bg-dark-primary">
-                            Certifications
+                            <Space>
+                                Certifications
+                                <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                            </Space>
                             </h3>
                             <ul className="certifications__list p-4">
-                              <li className="certifications__item mt-2">Toeic 660+</li>
-                              <li className="certifications__item mt-2">Certified Web Professional-Web Developer</li>
+                              {certifications.map((cerItem) => {
+                                return (
+                                  <li className="certifications__item mt-2">{cerItem}</li>
+                                )
+                              })}
+                              {/* <li className="certifications__item mt-2">Toeic 660+</li>
+                              <li className="certifications__item mt-2">Certified Web Professional-Web Developer</li> */}
                             </ul>
                           </div>
                         </div>
@@ -117,60 +142,54 @@ const RootLayout: React.FC = () => {
             <Col md={16} className="cv-editor__col cv-editor__col--right">
                 <div className="cv-editor__my-background p-4">
                     <div className="my-background">
+                      {/* Overview */}
                         <div className="my-background__overview ">
                             <h3 className="my-background__overview-title font-bold text-primary text-xl">
-                                <Space>
-                                    Career Objective
+                                <Space className="">
+                                   <div className="peer/career">Career Objective</div>
+                                  
+                                  <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
                                 </Space>
 
                                 <div className="my-background__overview text-sm text-black font-normal mt-2">
-                                    Over 2 years of experience in programming with good communication and quick learning skills Strengths: Front-end technology and Back-end web application developmentProficiency in HTML, CSS, JavaScript
+                                  {careerObject}
                                 </div>
+                               
                             </h3>
+
                         </div>
                         <div className="my-background__education">
+                          {/* Education section */}
                             <div className="education">
                                 <h3 className="education__title text-xl font-bold text-primary mt-4">
-                                    Education
+                                    <Space>Education <EditOutlined className="cursor-pointer text-lg" /></Space>
                                 </h3>
                                 <Divider className="bg-dark-primary opacity-50 my-4"/>
-                                <div className="education__info flex">
-                                    <div className="education__info-timeline">
-                                    2011/10 – 2014/09
-                                    </div>
-                                    <div className="education__info-school ml-4">
-                                        <div className="education__info-school-name font-bold">
-                                            FPT Polytechnic
-                                        </div>
-                                        <div className="education__info-school-major">
-                                            <span>Major: </span> - Web Development
-                                        </div>
-                                        <div className="education__info-school-level">
-                                            <span>Level: </span> - Excellence
-                                        </div>
-                                        <div className="education__info-school-level">
-                                            <span>GPA: </span> - 9.5 (current)
-                                        </div>
-                                    </div>
-                                </div>
+                                <Education education={education}/>
                             </div>
                             <div className="award">
                                 <h3 className="award__title font-bold text-primary text-2xl mt-4">
+                                  <Space>
                                     Awards
+                                    <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                                  </Space>
                                 </h3>
                                 <Divider className="bg-dark-primary opacity-50 my-4"/>
                                 <div className="award__info">
-                                <Awards/>
+                                <Awards awards={awards}/>
                                 </div>
                             </div>
                             {/* projects section */}
-                            <Projects/>
+                          <Projects projects={projects}/>
                         </div>
                     </div>
                 </div>
             </Col>
          </Row>
         </Content>
+        )}
+        
+        </>
       </Layout>
     </Layout>
   );

@@ -18,7 +18,7 @@ interface UserState {
   currentRequestId: undefined | string
 }
 
-const defaultUser = {
+export let defaultUser = {
     id: "1",
     jobTitle: "Solution Architechure",
     links: {
@@ -36,14 +36,7 @@ const defaultUser = {
       "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
     },
     additionSkills: [
-      {
-        "id": "1",
-        "name": "HTML"
-      },
-      {
-        "id": "2",
-        "name": "CSS"
-      }
+    "php", "figma", "react"
     ],
     techSkills: [
       {
@@ -52,10 +45,7 @@ const defaultUser = {
       }
     ],
     softSkills: [
-      {
-        "id": "1",
-        "name": "Present"
-      }
+     "present", "teamwork"
     ],
     languages: [
       "vietnamese",
@@ -93,8 +83,9 @@ const defaultUser = {
         "dateStart": "",
         "dateEnd": "",
         "desc": "Ứng dụng tạo CV theo chuẩn chuyên nghiệp, luôn luôn cho phép tải về PDF miễn phí",
+        "website": "https://trannhatsang.com",
         "repoLink": "https://github.com/sangtrandev00",
-        "numbers": 3,
+        "members": 3,
         "position": "Fullstack",
         "technologies": "ReactJS, Nodejs, Mongodb"
       },
@@ -103,8 +94,9 @@ const defaultUser = {
         "dateStart": "",
         "dateEnd": "",
         "desc": "Ứng dụng tạo CV theo chuẩn chuyên nghiệp, luôn luôn cho phép tải về PDF miễn phí",
+        "website": "https://trannhatsang.com",
         "repoLink": "https://github.com/sangtrandev00",
-        "numbers": 3,
+        "members": 3,
         "position": "Fullstack",
         "technologies": "ReactJS, Nodejs, Mongodb"
       },
@@ -113,8 +105,9 @@ const defaultUser = {
         "dateStart": "",
         "dateEnd": "",
         "desc": "Ứng dụng tạo CV theo chuẩn chuyên nghiệp, luôn luôn cho phép tải về PDF miễn phí",
+        "website": "https://trannhatsang.com",
         "repoLink": "https://github.com/sangtrandev00",
-        "numbers": 3,
+        "members": 3,
         "position": "Fullstack",
         "technologies": "ReactJS, Nodejs, Mongodb"
       }
@@ -182,7 +175,6 @@ export const updateUser = createAsyncThunk('user/updateUser', async (body: IUser
             return thunkAPI.rejectWithValue(error.response?.data)
           }
     }
-
     
     throw error
   }
@@ -215,20 +207,23 @@ const userSlice = createSlice({
         state.userList = action.payload
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.user = action.payload
+        state.user = action.payload;
+        defaultUser = action.payload;
       })
       .addCase(addUser.fulfilled, (state, action) => {
-        state.userList.push(action.payload)
+        state.userList.push(action.payload);
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        const userId = action.payload.id
 
-        const userExisitingIdx = state.userList.findIndex((user) => user.id === userId)
-        if (userExisitingIdx >= 0) {
-          state.userList[userExisitingIdx] = action.payload
-        }
+        console.log("state: ", state);
+        console.log("action: ", action);
+        state.user = action.payload;
+        // const userExisitingIdx = state.userList.findIndex((user) => user.id === userId)
+        // if (userExisitingIdx >= 0) {
+        //   state.userList[userExisitingIdx] = action.payload
+        // }
 
-        state.editingUser = null
+        // state.editingUser = null
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         const userId = action.meta.arg

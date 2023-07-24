@@ -1,116 +1,122 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "1",
+      "jobTitle": "Web Developer",
+      "links": {
+        "website": "https://trannhatsang.com",
+        "github": "https://github.com/sangtrandev00",
+        "linkedin": "https://linkedin.com/in/nhatsang00",
+        "facebook": "https://www.facebook.com/nhatsang00"
+      },
+      "info": {
+        "name": "Tran Nhat Sang",
+        "dateOfBirth": "9/10/2022",
+        "phone": "0937988510",
+        "email": "nhatsang0101@gmail.com",
+        "address": "Di An, Binh Duong",
+        "avatar": "https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
+        "jobTitle": "Web Developer "
+      },
+      "additionSkills": [
+        "PHP",
+        "Git",
+        "Figma",
+        "Wordpress"
+      ],
+      "techSkills": [
         {
-            "id": "1",
-            "jobTitle": "Web Developer",
-            "links": {
-                "website": "https://trannhatsang.com",
-                "github": "https://github.com/sangtrandev00",
-                "linkedin": "https://linkedin.com/in/nhatsang00",
-                "facebook": "https://www.facebook.com/nhatsang00"
-            },
-            "info": {
-                "name": "Tran Nhat Sang",
-                "dateOfBirth": "9/10/2022",
-                "phone": "0937988510",
-                "email": "nhatsang0101@gmail.com",
-                "address": "Di An, Binh Duong",
-                "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            },
-            "additionSkills": [
-                {
-                    "id": "1",
-                    "name": "Git"
-                },
-                {
-                    "id": "2",
-                    "name": "PHP"
-                },
-                {
-                    "id": "3",
-                    "name": "Wordpress"
-                }
-                ,
-                {
-                    "id": "4",
-                    "name": "Figma"
-                }
-            ],
-            "techSkills": [
-                {
-                    "id": "1",
-                    "name": "ReactJS"
-                }
-            ],
-            "softSkills": [
-                {
-                    "id": "1",
-                    "name": "Present"
-                }
-            ],
-            "languages": [
-                "vietnamese",
-                "english"
-            ],
-            "certifications": [
-                "TOEIC",
-                "IELTS"
-            ],
-            "careerObject": "Software Engineer Over 2 years of experience in programming with good communication and quick learning skills Strengths: Front-end technology and Back-end web application developmentProficiency in HTML, CSS, JavaScript",
-            "education": [
-                {
-                    "id": "dfdsfd",
-                    "schoolName": "FPT polytechnic",
-                    "major": "Web development",
-                    "level": "Excelence",
-                    "gpa": 9.5,
-                    "timeStart": "",
-                    "timeEnd": ""
-                }
-            ],
-            "awards": [
-                {
-                    "name": "Top 1 Hackathon",
-                    "timeAchieve": "12/2022"
-                },
-                {
-                    "name": "Top 1 Hackathon",
-                    "timeAchieve": "12/2022"
-                }
-            ],
-            "projects": [
-                {
-                    "name": "MyCV",
-                    "dateStart": "",
-                    "dateEnd": "",
-                    "desc": "Ứng dụng tạo CV theo chuẩn chuyên nghiệp, luôn luôn cho phép tải về PDF miễn phí",
-                    "repoLink": "https://github.com/sangtrandev00",
-                    "numbers": 3,
-                    "position": "Fullstack",
-                    "technologies": "ReactJS, Nodejs, Mongodb"
-                },
-                {
-                    "name": "MyCV",
-                    "dateStart": "",
-                    "dateEnd": "",
-                    "desc": "Ứng dụng tạo CV theo chuẩn chuyên nghiệp, luôn luôn cho phép tải về PDF miễn phí",
-                    "repoLink": "https://github.com/sangtrandev00",
-                    "numbers": 3,
-                    "position": "Fullstack",
-                    "technologies": "ReactJS, Nodejs, Mongodb"
-                },
-                {
-                    "name": "MyCV",
-                    "dateStart": "",
-                    "dateEnd": "",
-                    "desc": "Ứng dụng tạo CV theo chuẩn chuyên nghiệp, luôn luôn cho phép tải về PDF miễn phí",
-                    "repoLink": "https://github.com/sangtrandev00",
-                    "numbers": 3,
-                    "position": "Fullstack",
-                    "technologies": "ReactJS, Nodejs, Mongodb"
-                }
-            ]
-
+          "id": "1",
+          "name": "HTML, CSS/ SCSS, Bootstrap, Tailwind CSS, Responsive"
+        },
+        {
+          "id": "2",
+          "name": "Javascript, Jquery, ECMAScript, Typescript (OOP)"
+        },
+        {
+          "id": "3",
+          "name": "NodeJS (ExpressJS ), Mysql, Mongodb"
+        },
+        {
+          "id": "4",
+          "name": "ReactJS, React Typescript"
         }
-    ]
-  }
+      ],
+      "softSkills": [
+        "Present",
+        "Self-Teaching",
+        "Self-Motivation",
+        "Interpersonal Skill",
+        "Teamwork"
+      ],
+      "languages": [
+        "Vietnamese",
+        "English"
+      ],
+      "certifications": [
+        "660+ TOEIC"
+      ],
+      "careerObject": "Hi, I am a Web Developer with  Over 1.5 years of experience in programming with good communication and quick learning skills. My strength: Learning new languages and technologies is what am passionate about. I can work independently or work collaboratively with a team to create a high-quality result. Be able to use English like a tool to research or communicate with other people.",
+      "education": [
+        {
+          "id": "1",
+          "schoolName": "FPT polytechnic",
+          "major": "Web development",
+          "level": "Excelence",
+          "gpa": 9.5,
+          "timeStart": "01/9/2021",
+          "timeEnd": "01/7/2024"
+        }
+      ],
+      "awards": [
+        {
+          "name": "1st Student with Highest Score - GoldenBee (Golden Bee Award Summer 2022 )",
+          "timeAchieve": "10/2022"
+        },
+        {
+          "name": "4th prize at Branch B of FPT Edu hackathon 2022 Contest",
+          "timeAchieve": "09/2022"
+        },
+        {
+          "name": "Three times in a row in Top 150 Best Student at GoldenBee Award - Summer2022- Fall 2022 - Spring 2023 ",
+          "timeAchieve": "10/2022 - 10/6/2023"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Selling Course and Studying course online - wetech.online",
+          "dateStart": "06/2023",
+          "dateEnd": "Current",
+          "desc": "Selling and Learning Course online - Academy Platform with core fully functionlity of website",
+          "website": "https://trannhatsang.com",
+          "repoLink": "https://github.com/sangtrandev00/e-learning-platform",
+          "members": 1,
+          "position": "BA, Build Frontend (UI), Build backend,  Build Database, Deployment",
+          "technologies": "React Typescript, Nodejs(Expressjs), Mongodb, "
+        },
+        {
+          "name": "Techspace Selling Phone (Javascript Version and Typescript Version )",
+          "dateStart": "01/05/2023",
+          "dateEnd": "10/07/2023",
+          "desc": "Website selling phone with a modern website as a fullstack web application, See more detail at Github Repository at Readme.md",
+          "website": "https://techspace-phoner.netlify.app/site/index.html",
+          "repoLink": "https://github.com/sangtrandev00/fullstack-es6-techspace",
+          "members": 1,
+          "position": "Fullstack",
+          "technologies": "Javascript, Typescript, Nodejs(Expressjs), Mongodb"
+        },
+        {
+          "name": "Website Selling and Manage Phone - THEPHONER.ONLINE",
+          "dateStart": "03/2023",
+          "dateEnd": "04/2023",
+          "desc": "Website selling Phone and manage phone (https://thephoner.online)",
+          "website": "https://www.thephoner.online/",
+          "repoLink": "https://github.com/sangtrandev00",
+          "members": 3,
+          "position": "BA, Build Backend (PHP, Functions ), Support Frontend, Test, Deployment, Manage Team",
+          "technologies": "PHP, Mysql, Bootstrap, Jquery, Ajax"
+        }
+      ]
+    }
+  ]
+}

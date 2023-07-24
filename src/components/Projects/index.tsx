@@ -1,16 +1,28 @@
 import React from 'react'
-import { Divider } from 'antd';
+import { Divider, Space } from 'antd';
 import ProjectItem from './ProjectItem';
+import { IProject } from '../../types/user.type';
+import {EditOutlined} from '@ant-design/icons';
 
+type ProjectsProps = {
+  projects: IProject[]
+}
 
-const Projects = () => {
+const Projects = (props: ProjectsProps) => {
   return (
     <div className="projects">
-    <h3 className="projects__title font-bold text-primary text-2xl">Projects</h3>
+    <h3 className="projects__title font-bold text-primary text-2xl">
+      <Space>
+        Projects
+        <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+      </Space>
+   
+    </h3>
     <Divider className="bg-dark-primary opacity-50 my-4"/>
     <div className="projects__list">
-       <ProjectItem/>
-       <ProjectItem/>
+       {props.projects.map((projectItem) => {
+        return  <ProjectItem project={projectItem}/>
+       })}
     </div>
 </div>
   )

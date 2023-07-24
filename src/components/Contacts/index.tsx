@@ -1,5 +1,7 @@
 import React from 'react'
 import "./Contacts.scss"
+import { Space } from 'antd';
+import {EditOutlined} from '@ant-design/icons';
 
 type ContactsProps = {
   info: {name: string;
@@ -12,9 +14,15 @@ type ContactsProps = {
 const Contacts = (props: ContactsProps) => {
 
   const { name, dateOfBirth, phone, email, address } = props.info;
+  
   return (
     <div className="contacts">
-    <h3 className="contacts__title font-bold text-xl bg-dark-primary px-4 py-2">Contact information</h3>
+    <h3 className="contacts__title font-bold text-xl bg-dark-primary px-4 py-2">
+      <Space>
+      Contact information
+      <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+      </Space>
+    </h3>
 
     <ul className="contacts__list p-4">
       <li className="contacts__item flex mt-2 contacts__item--name"><span className="contact__label w-1/5 font-bold">Name:</span>  <span className="contact__content">{name}</span> </li>
