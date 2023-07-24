@@ -13,7 +13,7 @@
 
 + `git clone` the repo
 + `yarn` or `npm install`
-+ `yarn dev` to see the UI client (port: 500)
++ `yarn dev` to see the UI client (port: 5000)
 + `yarn server` to open server (port: 3000)
 
 ### Author:
