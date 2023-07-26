@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, InputNumber } from 'antd';
 import { IInfo } from '../../../types/user.type';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
 import { RootState, useAppDispatch } from '../../../store/store';
 import { defaultUser, localUpdateUserInfo, updateUserContactInfo } from '../../../store/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { current } from '@reduxjs/toolkit';
 
 interface IFormValues {
     name: string;
@@ -18,8 +19,17 @@ interface IFormValues {
 }
 
 const ProjectsForm: React.FC = () => {
+  const { TextArea } = Input;
 
-    const currentUser = useSelector((state: RootState) => state.user.user);
+  const { RangePicker } = DatePicker;
+
+  const dateFormat = 'YYYY/MM/DD';
+  const weekFormat = 'MM/DD';
+  const monthFormat = 'YYYY/MM';
+
+    const projects = useSelector((state: RootState) => state.user.user.projects);
+    const currProjectId = useSelector((state: RootState) => state.user.currProjectId);
+    const editingProject = projects.find((project) => project.id === currProjectId);
 
 
     const asyncDispatch = useAppDispatch();
@@ -58,71 +68,115 @@ const ProjectsForm: React.FC = () => {
     const onChange: DatePickerProps['onChange'] = (date, dateString) => {
         console.log(date, dateString);
     };
+
+    const inputDescChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      console.log('Change:', e.target.value);
+    };
   
-    const defaultDate = dayjs(currentUser.info?.dateOfBirth.toString()).format('YYYY-MM-DD');
+    // const defaultDate = dayjs(currentUser.info?.dateOfBirth.toString()).format('YYYY-MM-DD');
 
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log("handleOnChange",e.target.value);
         console.log("handleOnChange",e.target.name);
    
-        const updatedUserInfo = {
-            ...currentUser.info,
-            [e.target.name]: e.target.value
-        }
+        // const updatedUserInfo = {
+        //     ...currentUser.info,
+        //     [e.target.name]: e.target.value
+        // }
      
-        dispatch(localUpdateUserInfo(updatedUserInfo))
+        // dispatch(localUpdateUserInfo(updatedUserInfo))
 
     }
+
+
+    const inputMemberChangeHandler = (value: number) => {
+      console.log('changed', value);
+    };
 
 
     return (
         <Form
           name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          labelCol={{ span: 14 }}
+          wrapperCol={{ span: 24 }}
           style={{ maxWidth: 600 }}
+          layout={"vertical"}
           initialValues={{
-            website: currentUser.links?.website || '',
-            github: currentUser.links?.github || '',
-            facebook: currentUser.links?.facebook || '',
-            linkedin: currentUser.links?.linkedin || '',
+            projectName: editingProject?.name || '',
+            description: editingProject?.desc || '',
+            website: editingProject?.website || '',
+            members: editingProject?.members || "",
+            technologies: editingProject?.technologies || "",
+            github: editingProject?.repoLink || ''
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
-            label="Website"
-            name="website"
-            rules={[{ required: true, message: 'Please input your website url!' }]}
+            label="Name Project"
+            name="projectName"
+            rules={[{ required: true, message: 'Please input your project name' }]}
           >
-            <Input name="website" onChange={handleOnChange} placeholder='please enter your website url' value={currentUser.links.website} />
+            <Input name="projectName" onChange={handleOnChange} placeholder='please enter your website url' value={""} />
           </Form.Item>
       
           <Form.Item
-            label="Github"
-            name="github"
+            label="periodOfProject"
+            name="periodOfProject"
             rules={[{ required: true, message: 'Please input your job title' }]}
           >
-            <Input name="github" onChange={handleOnChange} placeholder='please enter your job title' value={currentUser.info.jobTitle}  />
+              <RangePicker
+              defaultValue={[dayjs('2015/01/01', dateFormat), dayjs('2015/01/01', dateFormat)]}
+              format={dateFormat}
+            />
           </Form.Item>
           <Form.Item
-            label="facebook Url"
-            name="facebook"
-            rules={[{ required: true, message: 'Please input your facebook' }]}
+            label="Project Description"
+            name="description"
+            rules={[{ required: true, message: 'Please input your description of project' }]}
           >
-            <Input onChange={handleOnChange} placeholder='please enter your facebook' value={currentUser.info.avatar} />
+           <TextArea
+              showCount
+              maxLength={100}
+              style={{ height: 120, marginBottom: 24 }}
+              onChange={inputDescChangeHandler}
+              placeholder="description"
+            />
           </Form.Item>
 
           <Form.Item
-            label="linkedin"
-            name="linkedin"
-            rules={[{ required: true, message: 'Please input your linkedin' }]}
+            label="website"
+            name="website"
+            rules={[{ required: true, message: 'Please input your website' }]}
           >
-            <Input name="linkedin" onChange={handleOnChange} placeholder='please enter your linkedin' value={currentUser.info.address}  />
+            <Input name="website" onChange={handleOnChange} placeholder='please enter your linkedin' value={""}  />
           </Form.Item>
    
+          <Form.Item
+            label="Github Repository link"
+            name="github"
+            rules={[{ required: true, message: 'Please input your github' }]}
+          >
+            <Input name="github" onChange={handleOnChange} placeholder='please enter your linkedin' value={""}  />
+          </Form.Item>
+          
+          <Form.Item
+            label="Number of members"
+            name="members"
+            rules={[{ required: true, message: 'Please input your members' }]}
+          >
+           <InputNumber min={1} max={100} defaultValue={editingProject?.members} onChange={inputMemberChangeHandler} />
+          </Form.Item>
+          <Form.Item
+            label="Technologies in use"
+            name="technologies"
+            rules={[{ required: true, message: 'Please input your technologies in project' }]}
+          >
+          <Input name="technologies" placeholder='Technologies in your project' />
+          </Form.Item>
+          
       
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className="bg-primary">

@@ -17,7 +17,7 @@ const TechSkills = (props: TechSkillsProps) => {
   const dispatch = useDispatch();
 
   const techSkillsEditHandler = () => {
-    dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    dispatch(startEditingFormState(FormEntryState.TECH_SKILLS));
     dispatch(toggleEntryDrawer());
   }
 
@@ -32,7 +32,7 @@ const TechSkills = (props: TechSkillsProps) => {
         <ul className="tech-skills__list p-4">
           {props.techSkills.map((techItem) => {
             return (
-              <li className="tech-skills__item mt-2">{techItem.name}</li>
+              <li key={techItem.id} className="tech-skills__item mt-2">{techItem.name}</li>
             )
           })}
         </ul>

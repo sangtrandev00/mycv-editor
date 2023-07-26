@@ -19,7 +19,7 @@ const Education = (props: EducationProps) => {
 
         {props.education.map((educateItem) => {
             return (
-                        <div className="education__info flex mb-4">
+                        <div key={educateItem.id} className="education__info flex mb-4">
                         <div className="education__info-timeline">
                        {educateItem.timeStart}-{educateItem.timeEnd}
                         </div>

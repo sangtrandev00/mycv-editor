@@ -1,6 +1,6 @@
 import { current, nanoid, createSlice, PayloadAction, createAsyncThunk, AsyncThunk } from '@reduxjs/toolkit'
 // import { initialuserList } from 'constant/blog'
-import { IInfo, IUser } from '../types/user.type'
+import { IEducation, IInfo, IUser } from '../types/user.type'
 import http from '../utils/http'
 import { CustomError } from '../utils/helper'
 import { Form } from 'antd';
@@ -31,6 +31,7 @@ interface UserState {
   loading: boolean
   currentRequestId: undefined | string
   isOpenDrawer: boolean
+  currProjectId: string
 }
 
 export let defaultUser = {
@@ -94,6 +95,7 @@ export let defaultUser = {
     ],
     projects: [
       {
+        "id": "1",
         "name": "MyCV",
         "dateStart": "",
         "dateEnd": "",
@@ -105,6 +107,7 @@ export let defaultUser = {
         "technologies": "ReactJS, Nodejs, Mongodb"
       },
       {
+        "id": "2",
         "name": "MyCV",
         "dateStart": "",
         "dateEnd": "",
@@ -116,6 +119,7 @@ export let defaultUser = {
         "technologies": "ReactJS, Nodejs, Mongodb"
       },
       {
+        "id": "3",
         "name": "MyCV",
         "dateStart": "",
         "dateEnd": "",
@@ -131,6 +135,7 @@ export let defaultUser = {
 
 const initialState: UserState = {
   formEntryState: FormEntryState.CONTACT_INFO,
+  currProjectId: "",
   userList: [],
   editingUser: null,
   user: defaultUser,
@@ -216,12 +221,33 @@ export const updateUserContactInfo = createAsyncThunk('user/updateUserContactInf
     
     throw error
   }
+});
+
+export const updateUserEducation = createAsyncThunk('user/updateUserEducation', async (body: {id: string, education: Omit<IEducation, "id">}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      education: body.education
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
 })
 
 export const updateCareerObjective = createAsyncThunk('user/updateCareerObjective', async (body: {id: string, careerObjective: string}, thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
-      careerObjective: body.careerObjective
+      careerObject: body.careerObjective
     }, {
       signal: thunkAPI.signal
     })
@@ -302,10 +328,10 @@ export const updateProjects = createAsyncThunk('user/updateProjects', async (bod
   }
 })
 
-export const updateTechnicalSkills = createAsyncThunk('user/updateTechnicalSkills', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+export const updateTechnicalSkills = createAsyncThunk('user/updateTechnicalSkills', async (body: {id: string, techSkills: {id: string, name: string}[]} , thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
-      careerObjective: body.careerObjective
+        techSkills: body.techSkills
     }, {
       signal: thunkAPI.signal
     })
@@ -424,15 +450,26 @@ const userSlice = createSlice({
       const userId = action.payload
       state.editingUser = state.userList.find((user) => user.id === userId) || null
     },
+    startingEditingProject: (state, action: PayloadAction<string>) => {
+      state.currProjectId = action.payload
+    },
     cancelEditingUser: (state) => {
       state.editingUser = null
     },
     localUpdateUserInfo: (state, action: PayloadAction<IInfo>) => {
 
-      console.log("action: ", action);
-      console.log("state: ", state.user);
-
       state.user.info = action.payload;
+    },
+    localUpdateCareerObjective: (state, action: PayloadAction<string>) => {
+      state.user.careerObject = action.payload;
+    },
+    localUpdateTechSkills: (state, action: PayloadAction<{id: string, name: string}>) => {
+
+      const skillExistingIdx = state.user.techSkills.findIndex((skill) => skill.id === action.payload.id)
+      if(skillExistingIdx >= 0) {
+        state.user.techSkills[skillExistingIdx] = action.payload;
+      }
+
     },
     startEditingFormState: (state, action: PayloadAction<FormEntryState>) => {
       state.formEntryState = action.payload
@@ -508,6 +545,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { startEditingUser, cancelEditingUser, localUpdateUserInfo, startEditingFormState, showEntryDrawer, closeEntryDrawer, toggleEntryDrawer } = userSlice.actions
+export const { startEditingUser, startingEditingProject, localUpdateTechSkills, cancelEditingUser, localUpdateUserInfo, startEditingFormState, showEntryDrawer, closeEntryDrawer, toggleEntryDrawer, localUpdateCareerObjective } = userSlice.actions
 const userReducer = userSlice.reducer
 export default userReducer

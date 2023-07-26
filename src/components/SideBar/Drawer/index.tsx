@@ -30,7 +30,7 @@ const FormEntryDrawer: React.FC = () => {
   };
 
   const onChange = (e: RadioChangeEvent) => {
-    setPlacement(e.target.value);
+    setPlacement(e.target.value as DrawerProps['placement']);
   };
 
   const onClose = () => {

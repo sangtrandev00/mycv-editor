@@ -9,11 +9,11 @@
         "facebook": "https://www.facebook.com/nhatsang00"
       },
       "info": {
-        "name": "Tran Nhat Sang Good",
+        "name": "Tran Nhat Sang",
         "email": "nhatsang0101@gmail.com",
         "phone": "0937988510",
         "address": "Dong Tac, Di An, Binh Duong",
-        "dateOfBirth": "11/07/2023",
+        "dateOfBirth": "18/07/2023",
         "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
         "jobTitle": "Web Developer"
       },
@@ -83,6 +83,7 @@
       ],
       "projects": [
         {
+          "id": "1",
           "name": "Selling Course and Studying course online - wetech.online",
           "dateStart": "06/2023",
           "dateEnd": "Current",
@@ -94,6 +95,7 @@
           "technologies": "React Typescript, Nodejs(Expressjs), Mongodb, "
         },
         {
+          "id": "2",
           "name": "Techspace Selling Phone (Javascript Version and Typescript Version )",
           "dateStart": "01/05/2023",
           "dateEnd": "10/07/2023",
@@ -105,6 +107,7 @@
           "technologies": "Javascript, Typescript, Nodejs(Expressjs), Mongodb"
         },
         {
+          "id": "3",
           "name": "Website Selling and Manage Phone - THEPHONER.ONLINE",
           "dateStart": "03/2023",
           "dateEnd": "04/2023",

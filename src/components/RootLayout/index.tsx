@@ -151,9 +151,9 @@ const RootLayout: React.FC = () => {
                             </Space>
                             </h3>
                             <ul className="certifications__list p-4">
-                              {certifications.map((cerItem) => {
+                              {certifications.map((cerItem, index) => {
                                 return (
-                                  <li className="certifications__item mt-2">{cerItem}</li>
+                                  <li key={index} className="certifications__item mt-2">{cerItem}</li>
                                 )
                               })}
                               {/* <li className="certifications__item mt-2">Toeic 660+</li>

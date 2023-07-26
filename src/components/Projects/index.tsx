@@ -31,7 +31,7 @@ const Projects = (props: ProjectsProps) => {
     <Divider className="bg-dark-primary opacity-50 my-4"/>
     <div className="projects__list">
        {props.projects.map((projectItem) => {
-        return  <ProjectItem project={projectItem}/>
+        return  <ProjectItem key={projectItem.id} project={projectItem}/>
        })}
     </div>
 </div>
