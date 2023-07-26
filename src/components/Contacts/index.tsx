@@ -2,6 +2,8 @@ import React from 'react'
 import "./Contacts.scss"
 import { Space } from 'antd';
 import {EditOutlined} from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { FormEntryState, showEntryDrawer, startEditingFormState, toggleEntryDrawer } from '../../store/user.slice';
 
 type ContactsProps = {
   info: {name: string;
@@ -11,16 +13,24 @@ type ContactsProps = {
     address: string;
     avatar?: string;}
 }
+
 const Contacts = (props: ContactsProps) => {
 
   const { name, dateOfBirth, phone, email, address } = props.info;
   
+  const dispatch = useDispatch();
+
+  const contactsEditHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    dispatch(toggleEntryDrawer());
+  }
+
   return (
     <div className="contacts">
     <h3 className="contacts__title font-bold text-xl bg-dark-primary px-4 py-2">
       <Space>
       Contact information
-      <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+      <EditOutlined onClick={contactsEditHandler} className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
       </Space>
     </h3>
 

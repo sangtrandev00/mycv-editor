@@ -1,6 +1,5 @@
 export interface IUser {
     id: string;
-    jobTitle: string;
     links: ILink,
     info: IInfo,
     techSkills: {
@@ -50,6 +49,7 @@ export interface IUser {
     email: string;
     address: string;
     avatar: string;
+    jobTitle: string;
   }
 
   export interface ILink {

@@ -17,9 +17,9 @@ import TechSkills from '../TechSkills';
 import AddSkills from '../AddSkills';
 import SoftSkills from '../SoftSkills';
 import { IUser } from '../../types/user.type';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
-import { getUser } from '../../store/user.slice';
+import { FormEntryState, getUser, showEntryDrawer, startEditingFormState, toggleEntryDrawer, updateCareerObjective } from '../../store/user.slice';
 import Education from '../Education';
 import MyLinks from '../MyLinks';
 import DrawerEntryData from '../SideBar/Drawer';
@@ -31,24 +31,49 @@ const RootLayout: React.FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const isLoading = useSelector((state: RootState) => state.user.loading);
 
-  const {id, jobTitle, info, additionSkills, softSkills, techSkills, projects, awards, education, careerObject, languages, links, certifications} = user;
+  const {id, info, additionSkills, softSkills, techSkills, projects, awards, education, careerObject, languages, links, certifications} = user;
 
   const languagesStr = languages.join(", ");
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const dispatch = useAppDispatch();
+  const thunkDispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const promise =  dispatch(getUser());
+    const promise =  thunkDispatch(getUser());
 
     console.log("init");
 
     return () => {
      promise.abort();
     }
-  }, [dispatch])
+  }, [thunkDispatch])
+
+  const careerObjectiveClickHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.CAREER_OBJECTIVE))
+    dispatch(toggleEntryDrawer());
+  }
+
+  const educationEditHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.EDUCATION))
+    dispatch(toggleEntryDrawer());
+  }
+
+  const awardsEditHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.AWARDS))
+    dispatch(toggleEntryDrawer());
+  }
+
+  const languagesEditHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.LANGUAGES))
+    dispatch(toggleEntryDrawer());
+  }
+  const certificationsEditHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.CERTIFICATIONS))
+    dispatch(toggleEntryDrawer());
+  }
 
   return (
     <Layout className="">
@@ -89,7 +114,7 @@ const RootLayout: React.FC = () => {
                     <div className="my-info">
                         <div className="my-info__heading p-4 text-center">
                             <h2 className="my-info__name text-3xl ">{info.name}</h2>
-                            <h2 className="my-info__title mt-4 text-lg">{jobTitle}</h2>
+                            <h2 className="my-info__title mt-4 text-lg">{info.jobTitle}</h2>
                             <img src={info.avatar} alt="" className="mt-4 mx-auto my-info__img rounded-full w-32 h-32 object-cover" />
                             <MyLinks links={links}/>
 
@@ -111,7 +136,7 @@ const RootLayout: React.FC = () => {
                             <h3 className="languages__title font-bold p-4 text-xl bg-dark-primary">
                             <Space>
                                 Languages
-                                <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                                <EditOutlined onClick={languagesEditHandler} className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
                             </Space>
                             </h3>
                             <p className="languages__list p-4">{languagesStr}</p>
@@ -122,7 +147,7 @@ const RootLayout: React.FC = () => {
                             <h3 className="certifications__title font-bold p-4 text-xl bg-dark-primary">
                             <Space>
                                 Certifications
-                                <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                                <EditOutlined onClick={certificationsEditHandler} className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
                             </Space>
                             </h3>
                             <ul className="certifications__list p-4">
@@ -148,7 +173,7 @@ const RootLayout: React.FC = () => {
                                 <Space className="">
                                    <div className="peer/career">Career Objective</div>
                                   
-                                  <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                                  <EditOutlined onClick={careerObjectiveClickHandler}  className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
                                 </Space>
 
                                 <div className="my-background__overview text-sm text-black font-normal mt-2">
@@ -162,7 +187,7 @@ const RootLayout: React.FC = () => {
                           {/* Education section */}
                             <div className="education">
                                 <h3 className="education__title text-xl font-bold text-primary mt-4">
-                                    <Space>Education <EditOutlined className="cursor-pointer text-lg" /></Space>
+                                    <Space>Education <EditOutlined onClick={educationEditHandler} className="cursor-pointer text-lg" /></Space>
                                 </h3>
                                 <Divider className="bg-dark-primary opacity-50 my-4"/>
                                 <Education education={education}/>
@@ -171,7 +196,7 @@ const RootLayout: React.FC = () => {
                                 <h3 className="award__title font-bold text-primary text-2xl mt-4">
                                   <Space>
                                     Awards
-                                    <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+                                    <EditOutlined onClick={awardsEditHandler} className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
                                   </Space>
                                 </h3>
                                 <Divider className="bg-dark-primary opacity-50 my-4"/>

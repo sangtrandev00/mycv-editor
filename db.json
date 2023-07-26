@@ -2,7 +2,6 @@
   "users": [
     {
       "id": "1",
-      "jobTitle": "Web Developer",
       "links": {
         "website": "https://trannhatsang.com",
         "github": "https://github.com/sangtrandev00",
@@ -10,13 +9,13 @@
         "facebook": "https://www.facebook.com/nhatsang00"
       },
       "info": {
-        "name": "Tran Nhat Sang",
-        "dateOfBirth": "9/10/2022",
-        "phone": "0937988510",
+        "name": "Tran Nhat Sang Good",
         "email": "nhatsang0101@gmail.com",
-        "address": "Di An, Binh Duong",
-        "avatar": "https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
-        "jobTitle": "Web Developer "
+        "phone": "0937988510",
+        "address": "Dong Tac, Di An, Binh Duong",
+        "dateOfBirth": "11/07/2023",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        "jobTitle": "Web Developer"
       },
       "additionSkills": [
         "PHP",

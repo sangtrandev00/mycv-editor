@@ -2,13 +2,31 @@ import React, { useState } from 'react';
 import { Button, Drawer, Radio, Space } from 'antd';
 import type { DrawerProps } from 'antd/es/drawer';
 import type { RadioChangeEvent } from 'antd/es/radio';
+import ContactInfoForm from '../../EntryData/FormContact';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { FormEntryState, closeEntryDrawer, showEntryDrawer } from '../../../store/user.slice';
+import CareerObjectiveForm from '../../EntryData/FormCareerObjective';
+import EducationForm from '../../EntryData/FormEducation';
+import AwardsForm from '../../EntryData/FormAwards';
+import TechSkillsForm from '../../EntryData/FormTechSkills';
+import AddSkillsForm from '../../EntryData/FormAddSkills';
+import SoftSkillsForm from '../../EntryData/FormSoftSkils';
+import LanguagesForm from '../../EntryData/FormLanguages';
+import CertificationsForm from '../../EntryData/FormCertifications';
+import ProjectsForm from '../../EntryData/FormProjects';
 
-const App: React.FC = () => {
-  const [open, setOpen] = useState(false);
+const FormEntryDrawer: React.FC = () => {
+  // const [open, setOpen] = useState(false);
+  const isOpenDrawer = useSelector((state: RootState) => state.user.isOpenDrawer);
+  const formEntryState = useSelector((state: RootState) => state.user.formEntryState);
+  
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right');
+  
+  const dispatch = useDispatch();
 
   const showDrawer = () => {
-    setOpen(true);
+    dispatch(showEntryDrawer());
   };
 
   const onChange = (e: RadioChangeEvent) => {
@@ -16,7 +34,7 @@ const App: React.FC = () => {
   };
 
   const onClose = () => {
-    setOpen(false);
+    dispatch(closeEntryDrawer());
   };
 
   return (
@@ -38,7 +56,7 @@ const App: React.FC = () => {
         placement={placement}
         width={500}
         onClose={onClose}
-        open={open}
+        open={isOpenDrawer}
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
@@ -48,12 +66,20 @@ const App: React.FC = () => {
           </Space>
         }
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {formEntryState === FormEntryState.CONTACT_INFO && <ContactInfoForm/>}
+        {formEntryState === FormEntryState.CAREER_OBJECTIVE && <CareerObjectiveForm/>}
+        {formEntryState === FormEntryState.EDUCATION && <EducationForm/>}
+        {formEntryState === FormEntryState.AWARDS && <AwardsForm/>}
+        {formEntryState === FormEntryState.PROJECTS && <ProjectsForm/>}
+        {formEntryState === FormEntryState.TECH_SKILLS && <TechSkillsForm/>}
+        {formEntryState === FormEntryState.ADDITION_SKILLS && <AddSkillsForm/>}
+        {formEntryState === FormEntryState.SOFT_SKILLS && <SoftSkillsForm/>}
+        {formEntryState === FormEntryState.LANGUAGES && <LanguagesForm/>}
+        {formEntryState === FormEntryState.CERTIFICATIONS && <CertificationsForm/>}
+      
       </Drawer>
     </>
   );
 };
 
-export default App;
+export default FormEntryDrawer;

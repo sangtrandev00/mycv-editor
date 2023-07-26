@@ -1,26 +1,40 @@
 import { current, nanoid, createSlice, PayloadAction, createAsyncThunk, AsyncThunk } from '@reduxjs/toolkit'
 // import { initialuserList } from 'constant/blog'
-import { IUser } from '../types/user.type'
+import { IInfo, IUser } from '../types/user.type'
 import http from '../utils/http'
 import { CustomError } from '../utils/helper'
+import { Form } from 'antd';
 
 type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
 
 type PendingAction = ReturnType<GenericAsyncThunk['pending']>
 type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>
 type FulfilledAction = ReturnType<GenericAsyncThunk['fulfilled']>
-
+export enum FormEntryState {
+  CONTACT_INFO,
+  CAREER_OBJECTIVE,
+  EDUCATION,
+  AWARDS,
+  TECH_SKILLS,
+  ADDITION_SKILLS,
+  SOFT_SKILLS,
+  PROJECTS,
+  CERTIFICATIONS,
+  LANGUAGES,
+  SOCIAL_LINKS
+}  
 interface UserState {
+  formEntryState: FormEntryState,
   userList: IUser[],
   user: IUser,
   editingUser: IUser | null
   loading: boolean
   currentRequestId: undefined | string
+  isOpenDrawer: boolean
 }
 
 export let defaultUser = {
     id: "1",
-    jobTitle: "Solution Architechure",
     links: {
         website: "",
         github: "",
@@ -33,7 +47,8 @@ export let defaultUser = {
       "phone": "0937988510",
       "email": "nhatsang0101@gmail.com",
       "address": "Di An, Binh Duong",
-      "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+      "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "jobTitle": "Software Engineer"
     },
     additionSkills: [
     "php", "figma", "react"
@@ -112,14 +127,16 @@ export let defaultUser = {
         "technologies": "ReactJS, Nodejs, Mongodb"
       }
     ]
-  }
+}
 
 const initialState: UserState = {
+  formEntryState: FormEntryState.CONTACT_INFO,
   userList: [],
   editingUser: null,
   user: defaultUser,
   loading: false,
-  currentRequestId: undefined
+  currentRequestId: undefined,
+  isOpenDrawer: false
 }
 
 export const getUserList = createAsyncThunk('user/getUserList', async (_, thunkAPI) => {
@@ -180,6 +197,216 @@ export const updateUser = createAsyncThunk('user/updateUser', async (body: IUser
   }
 })
 
+export const updateUserContactInfo = createAsyncThunk('user/updateUserContactInfo', async (body: {id: string, info: IInfo}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      info: body.info
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateCareerObjective = createAsyncThunk('user/updateCareerObjective', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateEducation = createAsyncThunk('user/updateEducation', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateAwards = createAsyncThunk('user/updateAwards', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateProjects = createAsyncThunk('user/updateProjects', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateTechnicalSkills = createAsyncThunk('user/updateTechnicalSkills', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateAdditionSkills = createAsyncThunk('user/updateAdditionSkills', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateSoftSkills = createAsyncThunk('user/updateSoftSkills', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateLanguages = createAsyncThunk('user/updateLanguages', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
+export const updateCertifications = createAsyncThunk('user/updateCertifications', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      careerObjective: body.careerObjective
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+})
+
 export const deleteUser = createAsyncThunk('user/deleteUser', async (userId: string, thunkAPI) => {
   const response = await http.delete<IUser>(`users/${userId}`, {
     signal: thunkAPI.signal
@@ -199,6 +426,25 @@ const userSlice = createSlice({
     },
     cancelEditingUser: (state) => {
       state.editingUser = null
+    },
+    localUpdateUserInfo: (state, action: PayloadAction<IInfo>) => {
+
+      console.log("action: ", action);
+      console.log("state: ", state.user);
+
+      state.user.info = action.payload;
+    },
+    startEditingFormState: (state, action: PayloadAction<FormEntryState>) => {
+      state.formEntryState = action.payload
+    },
+    showEntryDrawer: (state) => {
+      state.isOpenDrawer = true
+    },
+    closeEntryDrawer: (state) => {
+      state.isOpenDrawer = false
+    },
+    toggleEntryDrawer: (state) => {
+      state.isOpenDrawer = !state.isOpenDrawer
     }
   },
   extraReducers: (builder) => {
@@ -262,6 +508,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { startEditingUser, cancelEditingUser } = userSlice.actions
+export const { startEditingUser, cancelEditingUser, localUpdateUserInfo, startEditingFormState, showEntryDrawer, closeEntryDrawer, toggleEntryDrawer } = userSlice.actions
 const userReducer = userSlice.reducer
 export default userReducer

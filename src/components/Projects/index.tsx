@@ -3,18 +3,28 @@ import { Divider, Space } from 'antd';
 import ProjectItem from './ProjectItem';
 import { IProject } from '../../types/user.type';
 import {EditOutlined} from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { FormEntryState, showEntryDrawer, startEditingFormState } from '../../store/user.slice';
 
 type ProjectsProps = {
   projects: IProject[]
 }
 
 const Projects = (props: ProjectsProps) => {
+
+  const dispatch = useDispatch();
+
+  const projectsEditHandler = () => {
+    dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    dispatch(showEntryDrawer());
+  }
+
   return (
     <div className="projects">
     <h3 className="projects__title font-bold text-primary text-2xl">
       <Space>
         Projects
-        <EditOutlined className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
+        <EditOutlined onClick={projectsEditHandler} className="peer/career-hover:text-red-500 cursor-pointer text-lg" />
       </Space>
    
     </h3>
