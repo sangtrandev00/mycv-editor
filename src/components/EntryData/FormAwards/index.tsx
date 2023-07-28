@@ -77,6 +77,8 @@ const AwardsForm: React.FC = () => {
 
 
     return (
+        <>
+        <h3>Award Form</h3>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -130,6 +132,7 @@ const AwardsForm: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+        </>
       )
 }
 

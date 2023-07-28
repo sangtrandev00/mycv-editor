@@ -14,7 +14,7 @@ const AddSkills = (props: AddSkillsProps) => {
   const dispatch = useDispatch();
 
     const addSkillsEditHandler = () => {
-    dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    dispatch(startEditingFormState(FormEntryState.ADDITION_SKILLS));
     dispatch(toggleEntryDrawer());
   }
 

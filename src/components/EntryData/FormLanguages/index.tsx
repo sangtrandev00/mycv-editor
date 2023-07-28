@@ -77,7 +77,9 @@ const LanguagesForm: React.FC = () => {
 
 
     return (
-        <Form
+       <>
+       <h3>Languages Form</h3>
+       <Form
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -93,43 +95,28 @@ const LanguagesForm: React.FC = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Website"
-            name="website"
-            rules={[{ required: true, message: 'Please input your website url!' }]}
+            label="Languages 1"
+            name="language 1"
+            rules={[{ required: true, message: 'Please input your languages url!' }]}
           >
-            <Input name="website" onChange={handleOnChange} placeholder='please enter your website url' value={currentUser.links.website} />
+            <Input name="language1" onChange={handleOnChange} placeholder='please enter your languages' value={currentUser.links.website} />
+          </Form.Item>
+          <Form.Item
+            label="Language 2"
+            name="language2"
+            rules={[{ required: true, message: 'Please input your languages!' }]}
+          >
+            <Input name="language2" onChange={handleOnChange} placeholder='please enter your languages ' value={currentUser.links.website} />
           </Form.Item>
       
-          <Form.Item
-            label="Github"
-            name="github"
-            rules={[{ required: true, message: 'Please input your job title' }]}
-          >
-            <Input name="github" onChange={handleOnChange} placeholder='please enter your job title' value={currentUser.info.jobTitle}  />
-          </Form.Item>
-          <Form.Item
-            label="facebook Url"
-            name="facebook"
-            rules={[{ required: true, message: 'Please input your facebook' }]}
-          >
-            <Input onChange={handleOnChange} placeholder='please enter your facebook' value={currentUser.info.avatar} />
-          </Form.Item>
-
-          <Form.Item
-            label="linkedin"
-            name="linkedin"
-            rules={[{ required: true, message: 'Please input your linkedin' }]}
-          >
-            <Input name="linkedin" onChange={handleOnChange} placeholder='please enter your linkedin' value={currentUser.info.address}  />
-          </Form.Item>
-   
       
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className="bg-primary">
-              Update Social Links
+              Update languages
             </Button>
           </Form.Item>
         </Form>
+       </>
       )
 }
 

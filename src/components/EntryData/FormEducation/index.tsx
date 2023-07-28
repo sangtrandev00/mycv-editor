@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Checkbox, DatePicker, Form, Input, InputNumber } from 'antd';
-import type { DatePickerProps } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, InputNumber, notification } from 'antd';
+import type { DatePickerProps, TimeRangePickerProps } from 'antd';
 import dayjs from 'dayjs';
 import { RootState, useAppDispatch } from '../../../store/store';
-import { defaultUser, localUpdateUserInfo, updateUserContactInfo, updateUserEducation } from '../../../store/user.slice';
+import { defaultUser, localUpdateEducation, localUpdateUserInfo, updateUserContactInfo, updateUserEducation } from '../../../store/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { IEducation } from '../../../types/user.type';
 
@@ -18,13 +18,17 @@ interface IFormValues {
 }
 
 const EducationForm: React.FC = () => {
-    const dateFormat = 'YYYY/MM/DD';
+    const dateFormat = 'DD/MM/YYYY';
     const weekFormat = 'MM/DD';
     const monthFormat = 'YYYY/MM';
 
-    const educationBg = useSelector((state: RootState) => state.user.user.education);
+    const currEducation = useSelector((state: RootState) => state.user.currEducation);
+    const educationList = useSelector((state: RootState) => state.user.user.education);
+    const [education, setEducation] = useState(educationList);
+    console.log("current education: ", currEducation);
+  
 
-    console.log("education bg: ", educationBg);
+
 
     const asyncDispatch = useAppDispatch();
 
@@ -45,9 +49,19 @@ const EducationForm: React.FC = () => {
           timeEnd
       }
 
+
         console.log("new edu", updatedEducation);
-        asyncDispatch(updateUserEducation({id: "1", education: updatedEducation})).unwrap().then((result) => {
+
+        console.log("new education ", education)
+
+        asyncDispatch(updateUserEducation({id: "1", education: education})).unwrap().then((result) => {
             console.log("result: ", result);
+
+            notification.success({
+              message: 'Notification',
+              description: 'Update Education successfully',
+              duration: 2
+            })
         }).catch((error) => {
             console.log(error);
         });
@@ -58,43 +72,59 @@ const EducationForm: React.FC = () => {
         console.log('Failed:', errorInfo);
     };
           
-    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
+    const onChange: TimeRangePickerProps['onChange'] = (date, dateStrings) => {
+        console.log(date, dateStrings);
+
+        const dateStart = dateStrings[0];
+        const dateEnd = dateStrings[1];
+
+        const updatedCurrEducation = {
+          ...currEducation,
+          timeStart: dateStart,
+          timeEnd: dateEnd
+      }
+
+        dispatch(localUpdateEducation(updatedCurrEducation as IEducation))
     };
 
-    const gpaInputChangeHanlder = () => {
-      console.log("log");
+    const gpaInputChangeHanlder = (gpa: number | null) => {
+      console.log("log", gpa);
+
     }
   
     // const defaultDate = dayjs(currentUser.info?.dateOfBirth.toString()).format('YYYY-MM-DD');
 
 
-    // const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     console.log("handleOnChange",e.target.value);
-    //     console.log("handleOnChange",e.target.name);
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
    
-    //     const updatedUserInfo = {
-    //         ...currentUser.info,
-    //         [e.target.name]: e.target.value
-    //     }
+        const updatedCurrEducation = {
+           ...currEducation,
+           [e.target.name]: e.target.value
+        }
      
-    //     dispatch(localUpdateUserInfo(updatedUserInfo))
+        dispatch(localUpdateEducation(updatedCurrEducation as IEducation))
 
-    // }
-
+    }
+    
+    useEffect(() => {
+      console.log(educationList);
+      setEducation(educationList);
+    }, [educationList]);
 
     return (
+        <>
+        <h3>Education Form</h3>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
-          // initialValues={{
-          //   schoolName: educationBg.schoolName || '',
-          //   level: educationBg.level || '',
-          //   major: educationBg.major || '',
-          //   gpa: educationBg.gpa || ''
-          // }}
+          initialValues={{
+            schoolName: currEducation?.schoolName || '',
+            level: currEducation?.level || '',
+            major: currEducation?.major || '',
+            gpa: currEducation?.gpa || ''
+          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -105,8 +135,9 @@ const EducationForm: React.FC = () => {
             rules={[{ required: true, message: 'Please input Period of Study' }]}
           >
              <RangePicker
-      defaultValue={[dayjs('2015/01/01', dateFormat), dayjs('2015/01/01', dateFormat)]}
-      format={dateFormat}
+             onChange={onChange}
+            defaultValue={[dayjs(currEducation?.timeStart, dateFormat), dayjs(currEducation?.timeEnd, dateFormat)]}
+            // format={dateFormat}
     />
           </Form.Item>
       
@@ -115,21 +146,21 @@ const EducationForm: React.FC = () => {
             name="schoolName"
             rules={[{ required: true, message: 'Please input your job title' }]}
           >
-            <Input name="schoolName"  placeholder='please enter your job title' value={""}  />
+            <Input name="schoolName"  placeholder='please enter your job title' onChange={handleInputChange}  />
           </Form.Item>
           <Form.Item
             label="Level"
             name="level"
             rules={[{ required: true, message: 'Please input your level' }]}
           >
-            <Input name="level"  placeholder='please enter your major' value={""} />
+            <Input name="level"  placeholder='please enter your major' onChange={handleInputChange} />
           </Form.Item>
           <Form.Item
             label="Major"
             name="major"
             rules={[{ required: true, message: 'Please input your major' }]}
           >
-            <Input name="major"  placeholder='please enter your major' value={""} />
+            <Input name="major"  placeholder='please enter your major' onChange={handleInputChange} />
           </Form.Item>
           <Form.Item
             label="GPA"
@@ -145,6 +176,7 @@ const EducationForm: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+        </>
       )
 }
 

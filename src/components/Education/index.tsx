@@ -1,4 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { FormEntryState, showEntryDrawer, startEditingEducation, startEditingFormState, toggleEntryDrawer } from '../../store/user.slice';
+import { useDispatch } from 'react-redux';
+import { EditOutlined } from '@ant-design/icons';
 
 type EducationProps = {
     education: {
@@ -13,13 +16,51 @@ type EducationProps = {
 }
 
 const Education = (props: EducationProps) => {
+    const [hovering, setHovering] = useState(false);
+    const dispatch = useDispatch();
+
+    const handleMouseEnter = () => {
+        setHovering(true);
+
+        console.log("hover")
+      };
+    
+      const handleMouseLeave = () => {
+        setHovering(false);
+      };
+
+    //   const editCurrentEducation = () => {
+    //     // console.log("edit", id);
+    //     dispatch(startEditingEducation(id));
+    //     // dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    //     dispatch(showEntryDrawer());
+    //   }
+
+    const editCurrentEducationHandler = (educateId: string) => {
+        console.log("edit current education handler", educateId);
+        dispatch(startEditingEducation(educateId));
+        dispatch(startEditingFormState(FormEntryState.EDUCATION))
+        dispatch(toggleEntryDrawer());
+    }
 
     return (
     <div className="education__wrap">
 
         {props.education.map((educateItem) => {
             return (
-                        <div key={educateItem.id} className="education__info flex mb-4">
+                    <>
+      
+
+                            <div key={educateItem.id} className="education__info flex mb-4 relative" 
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                      {hovering && (
+                    <div className="absolute right-4 top-4">
+                    <EditOutlined onClick={() => editCurrentEducationHandler(educateItem.id)} className="cursor-pointer text-xl"/>
+                    </div>
+      )}
+                            
                         <div className="education__info-timeline">
                        {educateItem.timeStart}-{educateItem.timeEnd}
                         </div>
@@ -36,8 +77,10 @@ const Education = (props: EducationProps) => {
                             <div className="education__info-school-level">
                                 <span>GPA: </span> - {educateItem.gpa} (current)
                             </div>
-                </div>
-                </div>
+                            </div>
+                        </div>
+                    
+                    </>
             )
         })}
      

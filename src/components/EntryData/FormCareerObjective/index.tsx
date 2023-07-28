@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, notification } from 'antd';
 import { IInfo } from '../../../types/user.type';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
@@ -27,6 +27,12 @@ const CareerObjectiveForm: React.FC = () => {
 
         asyncDispatch(updateCareerObjective({id: "1", careerObjective: formValues.careerObject})).unwrap().then((result) => {
             console.log("result: ", result);
+
+            notification.success({
+              message: 'Notification',
+              description: 'Update Career Objective successfully',
+              duration: 2
+            })
         }).catch((error) => {
             console.log(error);
         });
@@ -57,6 +63,8 @@ const CareerObjectiveForm: React.FC = () => {
 
 
     return (
+        <>
+        <h3>Career Objective Form</h3>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -92,6 +100,7 @@ const CareerObjectiveForm: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+        </>
       )
 }
 

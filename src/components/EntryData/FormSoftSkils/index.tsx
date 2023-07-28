@@ -77,7 +77,9 @@ const SoftSkillsForm: React.FC = () => {
 
 
     return (
-        <Form
+      <>
+      <h3>Form Soft Skills</h3>
+      <Form
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -130,6 +132,7 @@ const SoftSkillsForm: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+      </>
       )
 }
 

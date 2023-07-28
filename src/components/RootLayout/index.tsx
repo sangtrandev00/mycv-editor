@@ -77,10 +77,10 @@ const RootLayout: React.FC = () => {
 
   return (
     <Layout className="">
-      <Sider className="border-spacing-2" style={{backgroundColor: "#ccc"}}  trigger={null} collapsible collapsed={collapsed} width={400} >
+      {/* <Sider className="border-spacing-2" style={{backgroundColor: "#ccc"}}  trigger={null} collapsible collapsed={collapsed} width={400} >
         <div className="demo-logo-vertical" />
         <SideBar/>
-      </Sider>
+      </Sider> */}
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button

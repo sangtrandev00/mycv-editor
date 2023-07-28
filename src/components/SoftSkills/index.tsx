@@ -13,7 +13,7 @@ const SoftSkills = (props: SoftSkillsProps) => {
   const dispatch = useDispatch();
 
     const softSkillsEditHandler = () => {
-    dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    dispatch(startEditingFormState(FormEntryState.SOFT_SKILLS));
     dispatch(toggleEntryDrawer());
   }
 

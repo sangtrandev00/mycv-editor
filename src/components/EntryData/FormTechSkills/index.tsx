@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, notification } from 'antd';
 import { IInfo } from '../../../types/user.type';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
@@ -45,6 +45,12 @@ const TechSkillsForm: React.FC = () => {
   
         asyncDispatch(updateTechnicalSkills({id: "1", techSkills: updatedTechSkills})).unwrap().then((result) => {
             console.log("result: ", result);
+
+            notification.success({
+              message: 'Notification',
+              description: 'Update Technical Skills successfully',
+              duration: 2
+            })
         }).catch((error) => {
             console.log(error);
         });
@@ -78,6 +84,8 @@ const TechSkillsForm: React.FC = () => {
     }
 
     return (
+        <>
+        <h3>Form techskills</h3>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -107,6 +115,7 @@ const TechSkillsForm: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+        </>
       )
 }
 

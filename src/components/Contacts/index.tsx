@@ -21,7 +21,7 @@ const Contacts = (props: ContactsProps) => {
   const dispatch = useDispatch();
 
   const contactsEditHandler = () => {
-    dispatch(startEditingFormState(FormEntryState.PROJECTS));
+    dispatch(startEditingFormState(FormEntryState.CONTACT_INFO));
     dispatch(toggleEntryDrawer());
   }
 

@@ -6,14 +6,14 @@
         "website": "https://trannhatsang.com",
         "github": "https://github.com/sangtrandev00",
         "linkedin": "https://linkedin.com/in/nhatsang00",
-        "facebook": "https://www.facebook.com/nhatsang00"
+        "facebook": "https://www.facebook.com/tran.nsang.9/"
       },
       "info": {
-        "name": "Tran Nhat Sang",
+        "name": "Tran Nhat Sang Dev",
         "email": "nhatsang0101@gmail.com",
         "phone": "0937988510",
         "address": "Dong Tac, Di An, Binh Duong",
-        "dateOfBirth": "18/07/2023",
+        "dateOfBirth": "14/09/2000",
         "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
         "jobTitle": "Web Developer"
       },
@@ -38,7 +38,7 @@
         },
         {
           "id": "4",
-          "name": "ReactJS, React Typescript"
+          "name": "ReactJS, React Typescript , Redux Toolkit"
         }
       ],
       "softSkills": [
@@ -58,13 +58,12 @@
       "careerObject": "Hi, I am a Web Developer with  Over 1.5 years of experience in programming with good communication and quick learning skills. My strength: Learning new languages and technologies is what am passionate about. I can work independently or work collaboratively with a team to create a high-quality result. Be able to use English like a tool to research or communicate with other people.",
       "education": [
         {
-          "id": "1",
-          "schoolName": "FPT polytechnic",
-          "major": "Web development",
+          "schoolName": "FPT polytechnic HCM",
+          "major": "Web development - Mobile Development",
           "level": "Excelence",
           "gpa": 9.5,
-          "timeStart": "01/9/2021",
-          "timeEnd": "01/7/2024"
+          "timeStart": "2021-10-01",
+          "timeEnd": "2023-03-29"
         }
       ],
       "awards": [

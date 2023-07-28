@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, notification } from 'antd';
 import { IInfo } from '../../../types/user.type';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
 import { RootState, useAppDispatch } from '../../../store/store';
 import { defaultUser, localUpdateUserInfo, updateUserContactInfo } from '../../../store/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'antd/es/form/Form';
 
 interface IFormValues {
     name: string;
@@ -18,6 +19,10 @@ interface IFormValues {
 }
 
 const ContactInfoForm: React.FC = () => {
+
+  const dateFormat = "DD/MM/YYYY";
+
+  const [form] = useForm();
 
     const currentUser = useSelector((state: RootState) => state.user.user);
 
@@ -47,6 +52,15 @@ const ContactInfoForm: React.FC = () => {
 
         asyncDispatch(updateUserContactInfo({id: "1", info: newContactInfo})).unwrap().then((result) => {
             console.log("result: ", result);
+
+          notification.success({
+            message: 'Notification',
+            description: 'Update Contact Information successfully',
+            duration: 2
+          })
+
+          // form.resetFields();
+
         }).catch((error) => {
             console.log(error);
         });
@@ -60,6 +74,14 @@ const ContactInfoForm: React.FC = () => {
           
     const onChange: DatePickerProps['onChange'] = (date, dateString) => {
         console.log(date, dateString);
+        const dateOfBirth = dayjs(dateString).format('DD/MM/YYYY');
+        const updatedUserInfo = {
+          ...currentUser.info,
+          dateOfBirth
+      }
+   
+      dispatch(localUpdateUserInfo(updatedUserInfo))
+
     };
   
     const defaultDate = dayjs(currentUser.info?.dateOfBirth.toString()).format('YYYY-MM-DD');
@@ -80,7 +102,10 @@ const ContactInfoForm: React.FC = () => {
 
 
     return (
-        <Form
+        <>
+        <h3>Contact Form Info</h3>
+          <Form
+          form={form}
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -132,7 +157,7 @@ const ContactInfoForm: React.FC = () => {
             name="dateOfBirth"
             rules={[{ required: true, message: 'Please input your date of birth number!' }]}
           >
-            <DatePicker  onChange={onChange} />
+            <DatePicker name="dateOfBirth"   defaultValue={dayjs(currentUser.info?.dateOfBirth.toString(), dateFormat)}  onChange={onChange} />
           </Form.Item>
           <Form.Item
             label="Phone number"
@@ -157,6 +182,7 @@ const ContactInfoForm: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+        </>
       )
 }
 

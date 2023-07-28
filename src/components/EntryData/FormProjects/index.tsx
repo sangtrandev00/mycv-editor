@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Button, Checkbox, DatePicker, Form, Input, InputNumber } from 'antd';
-import { IInfo } from '../../../types/user.type';
+import { IInfo, IProject } from '../../../types/user.type';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
 import { RootState, useAppDispatch } from '../../../store/store';
@@ -18,6 +18,18 @@ interface IFormValues {
     dateOfBirth: DatePickerProps;
 }
 
+const initalProjectData: Omit<IProject, "id"> = {
+    name: '',
+    dateStart: '',
+    dateEnd: '',
+    desc: '',
+    website: '',
+    repoLink: '',
+    members: 0,
+    position: '',
+    technologies: ""
+}
+
 const ProjectsForm: React.FC = () => {
   const { TextArea } = Input;
 
@@ -29,8 +41,10 @@ const ProjectsForm: React.FC = () => {
 
     const projects = useSelector((state: RootState) => state.user.user.projects);
     const currProjectId = useSelector((state: RootState) => state.user.currProjectId);
-    const editingProject = projects.find((project) => project.id === currProjectId);
-
+    // const editingProject = projects.find((project) => project.id === currProjectId);
+    const currentEditingProject = useSelector((state: RootState) => state.user.currentEditingProject);
+    const [formProjectData, setFormProjectData] = useState(initalProjectData);
+    const [currentProject, setCurrentProject] = useState(currentEditingProject);
 
     const asyncDispatch = useAppDispatch();
 
@@ -72,7 +86,16 @@ const ProjectsForm: React.FC = () => {
     const inputDescChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       console.log('Change:', e.target.value);
     };
-  
+
+    useEffect(() => {
+      console.log("User effect! Edit project");
+     
+      setCurrentProject(currentEditingProject);
+      setFormProjectData(currentEditingProject as Omit<IProject, "id">);
+      // console.log(object)
+    }, [currentEditingProject])
+
+    // console.log("currentProject:", currentProject);
     // const defaultDate = dayjs(currentUser.info?.dateOfBirth.toString()).format('YYYY-MM-DD');
 
 
@@ -94,21 +117,28 @@ const ProjectsForm: React.FC = () => {
       console.log('changed', value);
     };
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+      console.log(e.target.value);
+
+    }
 
     return (
-        <Form
+      <>
+      <h3>Form Projects Heading</h3>
+      <Form
           name="basic"
           labelCol={{ span: 14 }}
           wrapperCol={{ span: 24 }}
           style={{ maxWidth: 600 }}
           layout={"vertical"}
           initialValues={{
-            projectName: editingProject?.name || '',
-            description: editingProject?.desc || '',
-            website: editingProject?.website || '',
-            members: editingProject?.members || "",
-            technologies: editingProject?.technologies || "",
-            github: editingProject?.repoLink || ''
+            projectName: formProjectData?.name || '',
+            description: formProjectData?.desc || '',
+            website: formProjectData?.website || '',
+            members: formProjectData?.members || "",
+            technologies: formProjectData?.technologies || "",
+            github: formProjectData?.repoLink || ''
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -119,7 +149,7 @@ const ProjectsForm: React.FC = () => {
             name="projectName"
             rules={[{ required: true, message: 'Please input your project name' }]}
           >
-            <Input name="projectName" onChange={handleOnChange} placeholder='please enter your website url' value={""} />
+            <Input onChange={handleInputChange} value={formProjectData?.name} name="projectName" placeholder='please enter your website url'  />
           </Form.Item>
       
           <Form.Item
@@ -143,6 +173,7 @@ const ProjectsForm: React.FC = () => {
               style={{ height: 120, marginBottom: 24 }}
               onChange={inputDescChangeHandler}
               placeholder="description"
+              value={formProjectData?.desc}
             />
           </Form.Item>
 
@@ -151,7 +182,7 @@ const ProjectsForm: React.FC = () => {
             name="website"
             rules={[{ required: true, message: 'Please input your website' }]}
           >
-            <Input name="website" onChange={handleOnChange} placeholder='please enter your linkedin' value={""}  />
+            <Input onChange={handleInputChange} name="website" value={formProjectData?.website} placeholder='please enter your linkedin'  />
           </Form.Item>
    
           <Form.Item
@@ -159,7 +190,7 @@ const ProjectsForm: React.FC = () => {
             name="github"
             rules={[{ required: true, message: 'Please input your github' }]}
           >
-            <Input name="github" onChange={handleOnChange} placeholder='please enter your linkedin' value={""}  />
+            <Input onChange={handleInputChange} name="github" value={formProjectData?.repoLink} placeholder='please enter your linkedin'  />
           </Form.Item>
           
           <Form.Item
@@ -167,23 +198,24 @@ const ProjectsForm: React.FC = () => {
             name="members"
             rules={[{ required: true, message: 'Please input your members' }]}
           >
-           <InputNumber min={1} max={100} defaultValue={editingProject?.members} onChange={inputMemberChangeHandler} />
+           <InputNumber min={1} max={100} defaultValue={formProjectData?.members} onChange={inputMemberChangeHandler} />
           </Form.Item>
           <Form.Item
             label="Technologies in use"
             name="technologies"
             rules={[{ required: true, message: 'Please input your technologies in project' }]}
           >
-          <Input name="technologies" placeholder='Technologies in your project' />
+          <Input onChange={handleInputChange} name="technologies" value={formProjectData?.technologies} placeholder='Technologies in your project' />
           </Form.Item>
           
       
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className="bg-primary">
-              Update Social Links
+              Update current project
             </Button>
           </Form.Item>
         </Form>
+      </>
       )
 }
 
