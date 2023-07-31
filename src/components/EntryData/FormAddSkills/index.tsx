@@ -19,10 +19,10 @@ interface IFormValues {
 
 const AddSkillsForm: React.FC = () => {
 
-    const techSkillsList = useSelector((state: RootState) => state.user.user.techSkills);
+    const softSkills = useSelector((state: RootState) => state.user.user.softSkills);
 
-    const inititialValues: {[key: string]: string} = techSkillsList.reduce((acc, skillItem,index) => {
-      acc[`skill${index + 1}`] = skillItem.name;
+    const inititialValues: {[key: string]: string} = softSkills.reduce((acc, skillName,index) => {
+      acc[`skill${index + 1}`] = skillName;
       return acc;
     }, {} as {[key: string]: string});
 
@@ -91,14 +91,14 @@ const AddSkillsForm: React.FC = () => {
           autoComplete="off"
         >
 
-          {techSkillsList.map((skillItem, index) => {
+          {softSkills.map((skillName, index) => {
               return (
                   <Form.Item
                     label={`Skill${index + 1}`}
                     name={`skill${index + 1}`}
                     rules={[{ required: true, message: `Please input your skill${index + 1}!` }]}
                   >
-                    <Input name={`skill${index + 1}`} placeholder='please enter your skill' onChange={handleOnChange} value={skillItem.name} skill-id={skillItem.id} />
+                    <Input name={`skill${index + 1}`} placeholder='please enter your skill' onChange={handleOnChange} value={skillName} skill-id={index} />
                   </Form.Item>
               )
           })}

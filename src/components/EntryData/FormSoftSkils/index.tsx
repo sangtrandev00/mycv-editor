@@ -84,51 +84,51 @@ const SoftSkillsForm: React.FC = () => {
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
-          initialValues={{
-            website: currentUser.links?.website || '',
-            github: currentUser.links?.github || '',
-            facebook: currentUser.links?.facebook || '',
-            linkedin: currentUser.links?.linkedin || '',
-          }}
+          // initialValues={{
+          //   website: currentUser.soft?.website || '',
+          //   github: currentUser.soft?.github || '',
+          //   facebook: currentUser.soft?.facebook || '',
+          //   linkedin: currentUser.soft?.linkedin || '',
+          // }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
-            label="Website"
-            name="website"
-            rules={[{ required: true, message: 'Please input your website url!' }]}
+            label="Skill 1"
+            name="skill"
+            rules={[{ required: true, message: 'Please input your skill url!' }]}
           >
-            <Input name="website" onChange={handleOnChange} placeholder='please enter your website url' value={currentUser.links.website} />
+            <Input name="skill" onChange={handleOnChange} placeholder='please enter your website url' value={currentUser.links.website} />
           </Form.Item>
       
           <Form.Item
-            label="Github"
-            name="github"
+            label="Skill 2"
+            name="skill"
             rules={[{ required: true, message: 'Please input your job title' }]}
           >
-            <Input name="github" onChange={handleOnChange} placeholder='please enter your job title' value={currentUser.info.jobTitle}  />
+            <Input name="skill" onChange={handleOnChange} placeholder='please enter your skill' value={currentUser.info.jobTitle}  />
           </Form.Item>
           <Form.Item
-            label="facebook Url"
-            name="facebook"
-            rules={[{ required: true, message: 'Please input your facebook' }]}
+            label="Skill 3"
+            name="skill3"
+            rules={[{ required: true, message: 'Please input your skill3' }]}
           >
-            <Input onChange={handleOnChange} placeholder='please enter your facebook' value={currentUser.info.avatar} />
+            <Input onChange={handleOnChange} placeholder='please enter your skill' value={currentUser.info.avatar} />
           </Form.Item>
 
           <Form.Item
-            label="linkedin"
-            name="linkedin"
-            rules={[{ required: true, message: 'Please input your linkedin' }]}
+            label="Skill 4"
+            name="skill"
+            rules={[{ required: true, message: 'Please input your skill' }]}
           >
-            <Input name="linkedin" onChange={handleOnChange} placeholder='please enter your linkedin' value={currentUser.info.address}  />
+            <Input name="skill" onChange={handleOnChange} placeholder='please enter your skill' value={currentUser.info.address}  />
           </Form.Item>
    
       
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className="bg-primary">
-              Update Social Links
+              Update soft skills
             </Button>
           </Form.Item>
         </Form>

@@ -1,6 +1,6 @@
 import { current, nanoid, createSlice, PayloadAction, createAsyncThunk, AsyncThunk } from '@reduxjs/toolkit'
 // import { initialuserList } from 'constant/blog'
-import { IEducation, IInfo, IProject, IUser } from '../types/user.type'
+import { IEducation, IInfo, ILink, IProject, IUser } from '../types/user.type'
 import http from '../utils/http'
 import { CustomError } from '../utils/helper'
 
@@ -37,6 +37,7 @@ const initalProjectData : IProject = {
 }
 
 interface UserState {
+  userId:string;
   formEntryState: FormEntryState,
   userList: IUser[],
   user: IUser,
@@ -150,6 +151,7 @@ export let defaultUser = {
 }
 
 const initialState: UserState = {
+  userId: "1",
   formEntryState: FormEntryState.CONTACT_INFO,
   currProjectId: "",
   userList: [],
@@ -170,9 +172,10 @@ export const getUserList = createAsyncThunk('user/getUserList', async (_, thunkA
   return response.data
 })
 
-export const getUser = createAsyncThunk('user/getUser', async (_, thunkAPI) => {
+// changed userid
+export const getUser = createAsyncThunk('user/getUser', async (userId: string, thunkAPI) => {
  try {
-    const response = await http.get<IUser>('users/1', {
+    const response = await http.get<IUser>(`users/${userId}`, {
         signal: thunkAPI.signal
       })
       return response.data
@@ -221,6 +224,7 @@ export const updateUser = createAsyncThunk('user/updateUser', async (body: IUser
   }
 })
 
+// Changed userid
 export const updateUserContactInfo = createAsyncThunk('user/updateUserContactInfo', async (body: {id: string, info: IInfo}, thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
@@ -242,6 +246,29 @@ export const updateUserContactInfo = createAsyncThunk('user/updateUserContactInf
   }
 });
 
+// Changed userid
+export const updateSocialLinks = createAsyncThunk('user/updateSocialLinks', async (body: {id: string, links: ILink}, thunkAPI) => {
+  try {
+    const response = await http.patch<IUser>(`users/${body.id}`, {
+      links: body.links
+    }, {
+      signal: thunkAPI.signal
+    })
+    return response.data
+  } catch (error) {
+    // Handle error here
+
+    if(error instanceof CustomError) {
+        if (error.name === 'AxiosError' && error.response?.status === 422) {
+            return thunkAPI.rejectWithValue(error.response?.data)
+          }
+    }
+    
+    throw error
+  }
+});
+
+// Haven't changed userid yet
 export const updateUserEducation = createAsyncThunk('user/updateUserEducation', async (body: {id: string, education: IEducation[]}, thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
@@ -263,6 +290,7 @@ export const updateUserEducation = createAsyncThunk('user/updateUserEducation', 
   }
 })
 
+// changed userid
 export const updateCareerObjective = createAsyncThunk('user/updateCareerObjective', async (body: {id: string, careerObjective: string}, thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
@@ -284,26 +312,26 @@ export const updateCareerObjective = createAsyncThunk('user/updateCareerObjectiv
   }
 })
 
-export const updateEducation = createAsyncThunk('user/updateEducation', async (body: {id: string, education: IEducation[]}, thunkAPI) => {
-  try {
-    const response = await http.patch<IUser>(`users/${body.id}`, {
-      education: body.education
-    }, {
-      signal: thunkAPI.signal
-    })
-    return response.data
-  } catch (error) {
-    // Handle error here
+// export const updateEducation = createAsyncThunk('user/updateEducation', async (body: {id: string, education: IEducation[]}, thunkAPI) => {
+//   try {
+//     const response = await http.patch<IUser>(`users/${body.id}`, {
+//       education: body.education
+//     }, {
+//       signal: thunkAPI.signal
+//     })
+//     return response.data
+//   } catch (error) {
+//     // Handle error here
 
-    if(error instanceof CustomError) {
-        if (error.name === 'AxiosError' && error.response?.status === 422) {
-            return thunkAPI.rejectWithValue(error.response?.data)
-          }
-    }
+//     if(error instanceof CustomError) {
+//         if (error.name === 'AxiosError' && error.response?.status === 422) {
+//             return thunkAPI.rejectWithValue(error.response?.data)
+//           }
+//     }
     
-    throw error
-  }
-})
+//     throw error
+//   }
+// })
 
 export const updateAwards = createAsyncThunk('user/updateAwards', async (body: {id: string, careerObjective: string}, thunkAPI) => {
   try {
@@ -326,10 +354,12 @@ export const updateAwards = createAsyncThunk('user/updateAwards', async (body: {
   }
 })
 
-export const updateProjects = createAsyncThunk('user/updateProjects', async (body: {id: string, careerObjective: string}, thunkAPI) => {
+// changed userid
+export const updateProjects = createAsyncThunk('user/updateProjects', async (body: {id: string, projects: IProject[]}, thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
-      careerObjective: body.careerObjective
+      // careerObjective: body.careerObjective
+      projects: body.projects
     }, {
       signal: thunkAPI.signal
     })
@@ -347,6 +377,7 @@ export const updateProjects = createAsyncThunk('user/updateProjects', async (bod
   }
 })
 
+// have changed userid
 export const updateTechnicalSkills = createAsyncThunk('user/updateTechnicalSkills', async (body: {id: string, techSkills: {id: string, name: string}[]} , thunkAPI) => {
   try {
     const response = await http.patch<IUser>(`users/${body.id}`, {
@@ -514,8 +545,25 @@ const userSlice = createSlice({
       }
  
     },
+    localUpdateCurrentProject: (state, action: PayloadAction<IProject>) => {
+
+      const currProjectExisitingIdx = state.user.projects.findIndex((project) => project.id === action.payload.id)
+
+      if(currProjectExisitingIdx >= 0) {
+        state.user.projects[currProjectExisitingIdx] = action.payload;
+      }
+ 
+    },
+    localUpdateSocialLinks: (state, action: PayloadAction<ILink>) => {
+
+      state.user.links = action.payload
+ 
+    },
     startEditingFormState: (state, action: PayloadAction<FormEntryState>) => {
       state.formEntryState = action.payload
+    },
+    setCurrentUserId: (state, action: PayloadAction<string>) => {
+      state.userId = action.payload
     },
     showEntryDrawer: (state) => {
       state.isOpenDrawer = true
@@ -588,6 +636,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { startEditingUser, startingEditingProject, startEditingEducation, localUpdateTechSkills, cancelEditingUser, localUpdateUserInfo, startEditingFormState, showEntryDrawer, closeEntryDrawer, toggleEntryDrawer, localUpdateCareerObjective, localUpdateEducation } = userSlice.actions
+export const { startEditingUser, startingEditingProject, startEditingEducation, localUpdateTechSkills, cancelEditingUser, localUpdateUserInfo, startEditingFormState, showEntryDrawer, closeEntryDrawer, toggleEntryDrawer, localUpdateCareerObjective, localUpdateEducation, localUpdateCurrentProject, localUpdateSocialLinks, setCurrentUserId } = userSlice.actions
 const userReducer = userSlice.reducer
 export default userReducer

@@ -15,6 +15,8 @@ import SoftSkillsForm from '../../EntryData/FormSoftSkils';
 import LanguagesForm from '../../EntryData/FormLanguages';
 import CertificationsForm from '../../EntryData/FormCertifications';
 import ProjectsForm from '../../EntryData/FormProjects';
+import SocialLinksForm from '../../EntryData/FormSocialLinks';
+import { Link } from 'react-router-dom';
 
 const FormEntryDrawer: React.FC = () => {
   // const [open, setOpen] = useState(false);
@@ -46,9 +48,10 @@ const FormEntryDrawer: React.FC = () => {
           <Radio value="bottom">bottom</Radio>
           <Radio value="left">left</Radio>
         </Radio.Group>
-        <Button type="primary" onClick={showDrawer}>
-          Open
+        <Button type="primary" className="text-black" onClick={showDrawer}>
+          Open Drawer
         </Button>
+        {/* <Link to="/admin">Go to Admin page</Link> */}
       </Space>
       <Drawer
         title="Drawer with extra actions"
@@ -76,6 +79,7 @@ const FormEntryDrawer: React.FC = () => {
         {formEntryState === FormEntryState.SOFT_SKILLS && <SoftSkillsForm/>}
         {formEntryState === FormEntryState.LANGUAGES && <LanguagesForm/>}
         {formEntryState === FormEntryState.CERTIFICATIONS && <CertificationsForm/>}
+        {formEntryState === FormEntryState.SOCIAL_LINKS && <SocialLinksForm/>}
       
       </Drawer>
     </>

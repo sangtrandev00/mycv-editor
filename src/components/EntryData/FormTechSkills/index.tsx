@@ -20,7 +20,7 @@ interface IFormValues {
 const TechSkillsForm: React.FC = () => {
 
     const techSkillsList = useSelector((state: RootState) => state.user.user.techSkills);
-
+  const currUserId = useSelector((state: RootState) => state.user.userId);
     const inititialValues: {[key: string]: string} = techSkillsList.reduce((acc, skillItem,index) => {
       acc[`skill${index + 1}`] = skillItem.name;
       return acc;
@@ -43,7 +43,7 @@ const TechSkillsForm: React.FC = () => {
       })
       console.log(updatedTechSkills)
   
-        asyncDispatch(updateTechnicalSkills({id: "1", techSkills: updatedTechSkills})).unwrap().then((result) => {
+        asyncDispatch(updateTechnicalSkills({id: currUserId, techSkills: updatedTechSkills})).unwrap().then((result) => {
             console.log("result: ", result);
 
             notification.success({

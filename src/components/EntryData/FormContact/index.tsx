@@ -23,7 +23,7 @@ const ContactInfoForm: React.FC = () => {
   const dateFormat = "DD/MM/YYYY";
 
   const [form] = useForm();
-
+  const currUserId = useSelector((state: RootState) => state.user.userId);
     const currentUser = useSelector((state: RootState) => state.user.user);
 
     console.log("currentUser: ", currentUser.info);
@@ -50,7 +50,7 @@ const ContactInfoForm: React.FC = () => {
 
         console.log("new contact", newContactInfo);
 
-        asyncDispatch(updateUserContactInfo({id: "1", info: newContactInfo})).unwrap().then((result) => {
+        asyncDispatch(updateUserContactInfo({id: currUserId, info: newContactInfo})).unwrap().then((result) => {
             console.log("result: ", result);
 
           notification.success({
@@ -142,7 +142,7 @@ const ContactInfoForm: React.FC = () => {
             name="avatar"
             rules={[{ required: true, message: 'Please input your avatar' }]}
           >
-            <Input onChange={handleOnChange} placeholder='please enter your avatar' value={currentUser.info.avatar} />
+            <Input name="avatar" onChange={handleOnChange} placeholder='please enter your avatar' value={currentUser.info.avatar} />
           </Form.Item>
 
           <Form.Item
@@ -155,7 +155,7 @@ const ContactInfoForm: React.FC = () => {
           <Form.Item
             label="Birthdate: "
             name="dateOfBirth"
-            rules={[{ required: true, message: 'Please input your date of birth number!' }]}
+            // rules={[{ required: true, message: 'Please input your date of birth number!' }]}
           >
             <DatePicker name="dateOfBirth"   defaultValue={dayjs(currentUser.info?.dateOfBirth.toString(), dateFormat)}  onChange={onChange} />
           </Form.Item>

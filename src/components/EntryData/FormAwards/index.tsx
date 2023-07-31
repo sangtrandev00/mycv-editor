@@ -84,17 +84,17 @@ const AwardsForm: React.FC = () => {
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
-          initialValues={{
-            website: currentUser.links?.website || '',
-            github: currentUser.links?.github || '',
-            facebook: currentUser.links?.facebook || '',
-            linkedin: currentUser.links?.linkedin || '',
-          }}
+          // initialValues={{
+          //   website: currentUser.links?.website || '',
+          //   github: currentUser.links?.github || '',
+          //   facebook: currentUser.links?.facebook || '',
+          //   linkedin: currentUser.links?.linkedin || '',
+          // }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
+          {/* <Form.Item
             label="Website"
             name="website"
             rules={[{ required: true, message: 'Please input your website url!' }]}
@@ -124,11 +124,11 @@ const AwardsForm: React.FC = () => {
           >
             <Input name="linkedin" onChange={handleOnChange} placeholder='please enter your linkedin' value={currentUser.info.address}  />
           </Form.Item>
-   
+    */}
       
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className="bg-primary">
-              Update Social Links
+              Update Awards
             </Button>
           </Form.Item>
         </Form>

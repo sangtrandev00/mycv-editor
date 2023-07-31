@@ -13,7 +13,7 @@ interface IFormValues {
 }
 
 const CareerObjectiveForm: React.FC = () => {
-
+  const currUserId = useSelector((state: RootState) => state.user.userId);
     const careerObject = useSelector((state: RootState) => state.user.user.careerObject);
 
     console.log("carreerObject:", careerObject);
@@ -25,7 +25,7 @@ const CareerObjectiveForm: React.FC = () => {
     const onFinish = (formValues: IFormValues) => {
         
 
-        asyncDispatch(updateCareerObjective({id: "1", careerObjective: formValues.careerObject})).unwrap().then((result) => {
+        asyncDispatch(updateCareerObjective({id: currUserId, careerObjective: formValues.careerObject})).unwrap().then((result) => {
             console.log("result: ", result);
 
             notification.success({

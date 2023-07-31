@@ -19,15 +19,16 @@ import SoftSkills from '../SoftSkills';
 import { IUser } from '../../types/user.type';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
-import { FormEntryState, getUser, showEntryDrawer, startEditingFormState, toggleEntryDrawer, updateCareerObjective } from '../../store/user.slice';
+import { FormEntryState, getUser, setCurrentUserId, showEntryDrawer, startEditingFormState, toggleEntryDrawer, updateCareerObjective } from '../../store/user.slice';
 import Education from '../Education';
 import MyLinks from '../MyLinks';
 import DrawerEntryData from '../SideBar/Drawer';
-
+import {Link, useLocation, useParams} from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 
 const RootLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const { userId } = useParams();
   const user = useSelector((state: RootState) => state.user.user);
   const isLoading = useSelector((state: RootState) => state.user.loading);
 
@@ -42,14 +43,14 @@ const RootLayout: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const promise =  thunkDispatch(getUser());
-
+    const promise =  thunkDispatch(getUser(userId || "1"));
+    dispatch(setCurrentUserId(userId || "1"));
     console.log("init");
 
     return () => {
      promise.abort();
     }
-  }, [thunkDispatch])
+  }, [thunkDispatch, userId])
 
   const careerObjectiveClickHandler = () => {
     dispatch(startEditingFormState(FormEntryState.CAREER_OBJECTIVE))
@@ -76,14 +77,16 @@ const RootLayout: React.FC = () => {
   }
 
   return (
-    <Layout className="">
+    <div className="font-arimo container-xl w-[1200px] mx-auto">
+     <Row>
+     <Layout className="">
       {/* <Sider className="border-spacing-2" style={{backgroundColor: "#ccc"}}  trigger={null} collapsible collapsed={collapsed} width={400} >
         <div className="demo-logo-vertical" />
         <SideBar/>
       </Sider> */}
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
+          {/* <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
@@ -92,9 +95,10 @@ const RootLayout: React.FC = () => {
               width: 64,
               height: 64,
             }}
-          />
+          /> */}
 
           <DrawerEntryData/>
+          <Link to="/admin" className="border-2 p-2 ml-2">Go to Admin page</Link>
         </Header>
         <>
         {isLoading && <Skeleton active={true}/>}
@@ -217,6 +221,10 @@ const RootLayout: React.FC = () => {
         </>
       </Layout>
     </Layout>
+     </Row>
+    </div>
+
+   
   );
 };
 

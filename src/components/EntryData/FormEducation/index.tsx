@@ -6,6 +6,9 @@ import { RootState, useAppDispatch } from '../../../store/store';
 import { defaultUser, localUpdateEducation, localUpdateUserInfo, updateUserContactInfo, updateUserEducation } from '../../../store/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { IEducation } from '../../../types/user.type';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 const { RangePicker } = DatePicker;
 
@@ -27,9 +30,6 @@ const EducationForm: React.FC = () => {
     const [education, setEducation] = useState(educationList);
     console.log("current education: ", currEducation);
   
-
-
-
     const asyncDispatch = useAppDispatch();
 
     const dispatch = useDispatch();
@@ -132,12 +132,12 @@ const EducationForm: React.FC = () => {
           <Form.Item
             label="Period of Study"
             name="periodOfStudy"
-            rules={[{ required: true, message: 'Please input Period of Study' }]}
+            // rules={[{ required: true, message: 'Please input Period of Study' }]}
           >
              <RangePicker
              onChange={onChange}
             defaultValue={[dayjs(currEducation?.timeStart, dateFormat), dayjs(currEducation?.timeEnd, dateFormat)]}
-            // format={dateFormat}
+            format={dateFormat}
     />
           </Form.Item>
       

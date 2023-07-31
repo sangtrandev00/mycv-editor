@@ -95,24 +95,24 @@ const CertificationForm: React.FC = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Languages 1"
-            name="language 1"
-            rules={[{ required: true, message: 'Please input your languages url!' }]}
+            label="Certificate 1"
+            name="certificate1"
+            rules={[{ required: true, message: 'Please input your certificate!' }]}
           >
-            <Input name="language1" onChange={handleOnChange} placeholder='please enter your languages' value={currentUser.links.website} />
+            <Input name="certificate1" onChange={handleOnChange} placeholder='please enter your certificate' value={currentUser.links.website} />
           </Form.Item>
           <Form.Item
-            label="Language 2"
-            name="language2"
-            rules={[{ required: true, message: 'Please input your languages!' }]}
+            label="Certificate 2"
+            name="certificate2"
+            rules={[{ required: true, message: 'Please input your certificate!' }]}
           >
-            <Input name="language2" onChange={handleOnChange} placeholder='please enter your languages ' value={currentUser.links.website} />
+            <Input name="certificate2" onChange={handleOnChange} placeholder='please enter your certificate ' value={currentUser.links.website} />
           </Form.Item>
       
       
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className="bg-primary">
-              Update languages
+              Update certificates
             </Button>
           </Form.Item>
         </Form>

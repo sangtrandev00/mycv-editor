@@ -1,24 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, notification } from 'antd';
 import { IInfo } from '../../../types/user.type';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
 import { RootState, useAppDispatch } from '../../../store/store';
-import { defaultUser, localUpdateUserInfo, updateUserContactInfo } from '../../../store/user.slice';
+import { defaultUser, localUpdateSocialLinks, localUpdateUserInfo, updateSocialLinks, updateUserContactInfo } from '../../../store/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface IFormValues {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    jobTitle: string;
-    avatar: string;
-    dateOfBirth: DatePickerProps;
+  website: string;
+  github: string;
+  facebook: string;
+  linkedin: string;
 }
 
 const SocialLinksForm: React.FC = () => {
-
+  const currUserId = useSelector((state: RootState) => state.user.userId);
     const currentUser = useSelector((state: RootState) => state.user.user);
 
 
@@ -27,51 +24,42 @@ const SocialLinksForm: React.FC = () => {
     const dispatch = useDispatch();
 
     const onFinish = (formValues: IFormValues) => {
-        const dateOfBirth = dayjs(formValues.dateOfBirth.toString()).format('DD/MM/YYYY');
         
-        const newContactInfo = {
-            name: formValues.name,
-            email: formValues.email,
-            phone: formValues.phone,
-            address: formValues.address,
-            dateOfBirth,
-            avatar: formValues.avatar,
-            jobTitle: formValues.jobTitle
+        const updatedLinks = {
+           website: formValues.website,
+           github: formValues.github,
+           facebook: formValues.facebook,
+           linkedin: formValues.linkedin,
         }
 
-        console.log("new contact", newContactInfo);
-
-
-        asyncDispatch(updateUserContactInfo({id: "1", info: newContactInfo})).unwrap().then((result) => {
+        asyncDispatch(updateSocialLinks({id: currUserId, links: updatedLinks})).unwrap().then((result) => {
             console.log("result: ", result);
+
+            notification.success({
+                message: 'Notification',
+                description: 'Update Social Links successfully',
+                duration: 2
+            })
         }).catch((error) => {
             console.log(error);
         });
 
-        
       };
       
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
           
-    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
-    };
-  
-    const defaultDate = dayjs(currentUser.info?.dateOfBirth.toString()).format('YYYY-MM-DD');
-
-
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log("handleOnChange",e.target.value);
         console.log("handleOnChange",e.target.name);
    
-        const updatedUserInfo = {
-            ...currentUser.info,
+        const updatedSocialLinks = {
+            ...currentUser.links,
             [e.target.name]: e.target.value
         }
      
-        dispatch(localUpdateUserInfo(updatedUserInfo))
+        dispatch(localUpdateSocialLinks(updatedSocialLinks))
 
     }
 
