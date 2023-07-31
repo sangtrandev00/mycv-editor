@@ -36,9 +36,16 @@ const ContactInfoForm: React.FC = () => {
     const onFinish = (formValues: IFormValues) => {
         console.log('Success:', formValues);
 
-        const dateOfBirth = dayjs(formValues.dateOfBirth.toString()).format('DD/MM/YYYY');
-        
-        const newContactInfo = {
+      console.log(formValues.dateOfBirth);
+
+      let dateOfBirth = "";
+      if(formValues.dateOfBirth) {
+        dateOfBirth = dayjs(formValues.dateOfBirth.toString()).format('DD/MM/YYYY');
+      }else {
+        dateOfBirth = "9/10/2000";
+      }
+
+      const newContactInfo = {
             name: formValues.name,
             email: formValues.email,
             phone: formValues.phone,

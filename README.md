@@ -13,8 +13,10 @@
 
 + `git clone` the repo
 + `yarn` or `npm install`
-+ `yarn dev` to see the UI client (port: 5000)
-+ `yarn server` to open server (port: 3000)
++ Seperate two terminal (1 for frontend, 2 for backend)
++ `yarn dev` or `npm run dev` to see the UI client (port: 5000)
++ `yarn server` or `npm run server` to open server (port: 3000)
 
 ### Author:
 sangtrandev00
+https://trannhatsang.com

@@ -55,14 +55,14 @@
       "certifications": [
         "660+ TOEIC"
       ],
-      "careerObject": "Hi, I am a Web Developer with  Over 1.5 years of experience in programming with good communication and quick learning skills. My strength: Learning new languages and technologies is what am passionate about. I can work independently or work collaboratively with a team to create a high-quality result. Be able to use English like a tool to research or communicate with other people.",
+      "careerObject": "Hi, I am a Web Developer with  Over 1.5 years of experience in programming with good communication and quick learning skills. My strength: Learning new languages and technologies is what am passionate about. I can work independently or work collaboratively with a team to create a high-quality result. Be able to use English like a tool to research or communicate with other people. Deploy person",
       "education": [
         {
           "schoolName": "FPT polytechnic HCM",
           "major": "Web development - Mobile Development",
           "level": "Excelence",
           "gpa": 9.5,
-          "timeStart": "15/09/2021",
+          "timeStart": "24/09/2021",
           "timeEnd": "22/05/2024"
         }
       ],
@@ -110,6 +110,7 @@
           "name": "Website Selling and Manage Phone - THEPHONER.ONLINE",
           "dateStart": "03/2023",
           "dateEnd": "04/2023",
+          "desc": "This is one of the best course, i worked with my team. My team have 4 people",
           "website": "https://www.thephoner.online/",
           "repoLink": "https://github.com/sangtrandev00",
           "members": 5,
@@ -127,11 +128,11 @@
         "linkedin": "https://linkedin.com/in/nhatsang00"
       },
       "info": {
-        "name": "tran Van Nam",
+        "name": "tran Van Nam 32",
         "email": "nhatsang0101@gmail.com",
         "phone": "0937988510",
         "address": "Dong Tac, Di An, Binh Duong",
-        "dateOfBirth": "09/10/2000",
+        "dateOfBirth": "9/10/2000",
         "avatar": "https://plus.unsplash.com/premium_photo-1664536392779-049ba8fde933?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
         "jobTitle": "Web Developer"
       },
@@ -152,7 +153,7 @@
         },
         {
           "id": "3",
-          "name": "NodeJS (ExpressJS ), Mysql, Mongodb"
+          "name": "NodeJS (ExpressJS ), Mysql, Mongodb, Mongoose"
         },
         {
           "id": "4",
@@ -246,6 +247,243 @@
       },
       "info": {
         "name": "Ho Van Giap",
+        "email": "nhatsang0101@gmail.com",
+        "phone": "0937988510",
+        "address": "Dong Tac, Di An, Binh Duong",
+        "dateOfBirth": "09/10/2000",
+        "avatar": "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        "jobTitle": "Web Developer"
+      },
+      "additionSkills": [
+        "PHP",
+        "Git",
+        "Figma",
+        "Wordpress"
+      ],
+      "techSkills": [
+        {
+          "id": "1",
+          "name": "HTML, CSS/ SCSS, Bootstrap, Tailwind CSS, Responsive"
+        },
+        {
+          "id": "2",
+          "name": "Javascript, Jquery, ECMAScript, Typescript (OOP)"
+        },
+        {
+          "id": "3",
+          "name": "NodeJS (ExpressJS ), Mysql, Mongodb"
+        },
+        {
+          "id": "4",
+          "name": "ReactJS, React Typescript , Redux Toolkit"
+        }
+      ],
+      "softSkills": [
+        "Present",
+        "Self-Teaching",
+        "Self-Motivation",
+        "Interpersonal Skill",
+        "Teamwork"
+      ],
+      "languages": [
+        "Vietnamese",
+        "English"
+      ],
+      "certifications": [
+        "660+ TOEIC"
+      ],
+      "careerObject": "Hi, I am a Web Developer with  Over 1.5 years of experience in programming with good communication and quick learning skills. My strength: Learning new languages and technologies is what am passionate about. I can work independently or work collaboratively with a team to create a high-quality result. Be able to use English like a tool to research or communicate with other people.",
+      "education": [
+        {
+          "schoolName": "FPT polytechnic HCM",
+          "major": "Web development - Mobile Development",
+          "level": "Excelence",
+          "gpa": 9.5,
+          "timeStart": "15/09/2021",
+          "timeEnd": "22/05/2024"
+        }
+      ],
+      "awards": [
+        {
+          "name": "1st Student with Highest Score - GoldenBee (Golden Bee Award Summer 2022 )",
+          "timeAchieve": "10/2022"
+        },
+        {
+          "name": "4th prize at Branch B of FPT Edu hackathon 2022 Contest",
+          "timeAchieve": "09/2022"
+        },
+        {
+          "name": "Three times in a row in Top 150 Best Student at GoldenBee Award - Summer2022- Fall 2022 - Spring 2023 ",
+          "timeAchieve": "10/2022 - 10/6/2023"
+        }
+      ],
+      "projects": [
+        {
+          "id": "1",
+          "name": "Selling Course and Studying course online - wetech.online",
+          "dateStart": "06/2023",
+          "dateEnd": "Current",
+          "desc": "Selling and Learning Course online - Academy Platform with core fully functionlity of website",
+          "website": "https://trannhatsang.com",
+          "repoLink": "https://github.com/sangtrandev00/e-learning-platform",
+          "members": 5,
+          "position": "BA, Build Frontend (UI), Build backend,  Build Database, Deployment",
+          "technologies": "React Typescript, Nodejs(Expressjs), Mongodb, "
+        },
+        {
+          "id": "2",
+          "name": "Techspace Selling Phone (Javascript Version and Typescript Version )",
+          "dateStart": "01/05/2023",
+          "dateEnd": "10/07/2023",
+          "desc": "Website selling phone with a modern website as a fullstack web application, See more detail at Github Repository at Readme.md",
+          "website": "https://techspace-phoner.netlify.app/site/index.html",
+          "repoLink": "https://github.com/sangtrandev00/fullstack-es6-techspace",
+          "members": 1,
+          "position": "Fullstack",
+          "technologies": "Javascript, Typescript, Nodejs(Expressjs), Mongodb"
+        },
+        {
+          "id": "3",
+          "name": "Website Selling and Manage Phone - THEPHONER.ONLINE",
+          "dateStart": "03/2023",
+          "dateEnd": "04/2023",
+          "website": "https://www.thephoner.online/",
+          "repoLink": "https://github.com/sangtrandev00",
+          "members": 5,
+          "position": "BA, Build Backend (PHP, Functions ), Support Frontend, Test, Deployment, Manage Team",
+          "technologies": "PHP, Mysql, Bootstrap, Jquery, Ajax"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "links": {
+        "website": "https://trannhatsang.com/portfolio",
+        "github": "https://github.com/sangtrandev00",
+        "facebook": "https://www.facebook.com/tran.nsang.9/",
+        "linkedin": "https://linkedin.com/in/nhatsang00"
+      },
+      "info": {
+        "name": "Pham Dinh Dung",
+        "email": "nhatsang0101@gmail.com",
+        "phone": "0937988510",
+        "address": "Dong Tac, Di An, Binh Duong",
+        "dateOfBirth": "9/10/2000",
+        "avatar": "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        "jobTitle": "Web Developer"
+      },
+      "additionSkills": [
+        "PHP",
+        "Git",
+        "Figma",
+        "Wordpress"
+      ],
+      "techSkills": [
+        {
+          "id": "1",
+          "name": "HTML, CSS/ SCSS, Bootstrap, Tailwind CSS, Responsive"
+        },
+        {
+          "id": "2",
+          "name": "Javascript, Jquery, ECMAScript, Typescript (OOP)"
+        },
+        {
+          "id": "3",
+          "name": "NodeJS (ExpressJS ), Mysql, Mongodb"
+        },
+        {
+          "id": "4",
+          "name": "ReactJS, React Typescript , Redux Toolkit"
+        }
+      ],
+      "softSkills": [
+        "Present",
+        "Self-Teaching",
+        "Self-Motivation",
+        "Interpersonal Skill",
+        "Teamwork"
+      ],
+      "languages": [
+        "Vietnamese",
+        "English"
+      ],
+      "certifications": [
+        "660+ TOEIC"
+      ],
+      "careerObject": "Hi, I am a Web Developer with  Over 1.5 years of experience in programming with good communication and quick learning skills. My strength: Learning new languages and technologies is what am passionate about. I can work independently or work collaboratively with a team to create a high-quality result. Be able to use English like a tool to research or communicate with other people.",
+      "education": [
+        {
+          "schoolName": "FPT polytechnic HCM",
+          "major": "Web development - Mobile Development",
+          "level": "Excelence",
+          "gpa": 9.5,
+          "timeStart": "15/09/2021",
+          "timeEnd": "22/05/2024"
+        }
+      ],
+      "awards": [
+        {
+          "name": "1st Student with Highest Score - GoldenBee (Golden Bee Award Summer 2022 )",
+          "timeAchieve": "10/2022"
+        },
+        {
+          "name": "4th prize at Branch B of FPT Edu hackathon 2022 Contest",
+          "timeAchieve": "09/2022"
+        },
+        {
+          "name": "Three times in a row in Top 150 Best Student at GoldenBee Award - Summer2022- Fall 2022 - Spring 2023 ",
+          "timeAchieve": "10/2022 - 10/6/2023"
+        }
+      ],
+      "projects": [
+        {
+          "id": "1",
+          "name": "Selling Course and Studying course online - hihi.online",
+          "dateStart": "06/2023",
+          "dateEnd": "Current",
+          "desc": "Selling and Learning Course online - Academy Platform with core fully functionlity of website",
+          "website": "https://trannhatsang.com",
+          "repoLink": "https://github.com/sangtrandev00/e-learning-platform",
+          "members": 1,
+          "position": "BA, Build Frontend (UI), Build backend,  Build Database, Deployment",
+          "technologies": "React Typescript, Nodejs(Expressjs), Mongodb, "
+        },
+        {
+          "id": "2",
+          "name": "Techspace Selling Phone (Javascript Version and Typescript Version )",
+          "dateStart": "01/05/2023",
+          "dateEnd": "10/07/2023",
+          "desc": "Website selling phone with a modern website as a fullstack web application, See more detail at Github Repository at Readme.md",
+          "website": "https://techspace-phoner.netlify.app/site/index.html",
+          "repoLink": "https://github.com/sangtrandev00/fullstack-es6-techspace",
+          "members": 1,
+          "position": "Fullstack",
+          "technologies": "Javascript, Typescript, Nodejs(Expressjs), Mongodb"
+        },
+        {
+          "id": "3",
+          "name": "Website Selling and Manage Phone - THEPHONER.ONLINE",
+          "dateStart": "03/2023",
+          "dateEnd": "04/2023",
+          "desc": "Wow Amazing good chop. Dinh cao cua vo lam ",
+          "website": "https://www.thephoner.online/",
+          "repoLink": "https://github.com/sangtrandev00",
+          "members": 5,
+          "position": "BA, Build Backend (PHP, Functions ), Support Frontend, Test, Deployment, Manage Team",
+          "technologies": "PHP, Mysql, Bootstrap, Jquery, Ajax"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "links": {
+        "website": "https://trannhatsang.com/portfolio",
+        "github": "https://github.com/sangtrandev00",
+        "facebook": "https://www.facebook.com/tran.nsang.9/",
+        "linkedin": "https://linkedin.com/in/nhatsang00"
+      },
+      "info": {
+        "name": "Nguyen Thi Nam",
         "email": "nhatsang0101@gmail.com",
         "phone": "0937988510",
         "address": "Dong Tac, Di An, Binh Duong",

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Card, List, Avatar, Space, notification } from 'antd';
+import { Card, List, Avatar, Space, notification, Button } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
@@ -68,6 +68,8 @@ const Admin: React.FC = () => {
 
     return (
        <div className="bg-slate-400 w-[1200px] mx-auto p-4 mt-10 h-[40rem]">
+        <h2 className="text-2xl mb-3">List of CV Users</h2>
+        <Button className="mb-3">Add CV</Button>
          <List
           grid={{ gutter: 16, column: 4 }}
           dataSource={data}
